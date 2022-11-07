@@ -43,7 +43,7 @@ void adminModule :: adminLogin(){
     cout<<"Admin password : ";
     for (int i = 0; i < 5; i++) {
         managerPass+=getchar();
-        cout<<"*";
+        //cout<<"*";
     }
     cout<<endl;
     if(managerUser=="admin" && managerPass == "admin")
@@ -109,12 +109,28 @@ void adminModule :: managerCreate(){
     cout<<"How many manager to be added ?\n"<<'\n';
     cin>>n;
     for(int i=0;i<n;i++){
-        cout<<"Insert id :"<<'\n';
+        cout<<"Insert id :";
         cin>>managerId;
-        cout<<"Insert Name :"<<'\n';
-        cin>>managerName;
+        cout<<endl;
+        cout<<"Insert Name : ";
+        cin.ignore();getline(cin,managerName);
+        cout<<endl;
+        cout<<"Insert Gender : ";
+        cin>>managerGender;
+        cout<<endl;
+        cout<<"Insert Post : ";
+        cin>>managerPost;
+        cout<<endl;
+        cout<<"Insert Salary : ";
+        cin>>managerSalary;
+        cout<<endl;
+
         file.open("managerRecord.txt",ios::app|ios::out);
-        file<<managerId<<" "<<managerName<<'\n';
+        file<<managerId<<endl;
+        file<<managerName<<endl;
+        file<<managerGender<<endl;
+        file<<managerPost<<endl;
+        file<<managerSalary<<endl;
         file.close();
     }
 }
@@ -123,15 +139,19 @@ void adminModule :: managerRead(){
     fstream file;
     file.open("managerRecord.txt",ios::in);
     cout<<"\n\n\t\t\t\tDisplay Record\n";
-    cout<<"managerId"<<" | "<<"Managerame"<<'\n';
-    cout<<"-----------------------"<<"\n";
+    cout<<"ManagerId"<<" | "<<"ManagerName"<<" | "<<"ManagerGender"<<" | "<<"ManagerPost"<<" | "<<"ManagerSalary"<<'\n';
+
+    cout<<"--------------------------------------------------------------------------------"<<"\n";
     if(!file)
     {
         cout<<"You need to insert first \nPress any key\n";
         // adminMenu(); /*blank freeze*/
     }
-    while(file>>managerId>>managerName)
+    while(file>>managerId)
     {
+        file.ignore();
+        getline(file,managerName);
+        file>>managerGender>>managerPost>>managerSalary;
         cout.fill(' ');
         cout.setf(ios :: left, ios :: adjustfield);
         cout.width(10);
@@ -140,7 +160,16 @@ void adminModule :: managerRead(){
         cout.fill(' ');
         cout.setf(ios :: left, ios :: adjustfield);
         cout.width(10);
-        cout<<managerName;
+        cout<<managerName<<"| ";
+        cout.setf(ios :: left, ios :: adjustfield);
+        cout.width(10);
+        cout<<managerGender<<"| ";
+        cout.setf(ios :: left, ios :: adjustfield);
+        cout.width(10);
+        cout<<managerPost<<"| ";
+        cout.setf(ios :: left, ios :: adjustfield);
+        cout.width(10);
+        cout<<managerSalary<<" $";
         cout<<'\n';
     }
     file.close();
@@ -160,19 +189,43 @@ void adminModule :: managerUpdate(){
     }
     cout<<"ManagerId to be updaated :\n";
     cin>>testId;
-    while(file>>managerId>>managerName)
+    while(file>>managerId)
     {
+        file.ignore();
+        getline(file,managerName);
+        file>>managerGender>>managerPost>>managerSalary;
         if(testId==managerId)
         {
             found=1;
-            cout<<"Insert id :"<<'\n';
+            cout<<"Insert id :";
             cin>>managerId;
-            cout<<"Insert Name :"<<'\n';
-            cin>>managerName;
-            file1<<managerId<<" "<<managerName<<'\n';
+            cout<<endl;
+            cout<<"Insert Name : ";
+            cin.ignore();getline(cin,managerName);
+            cout<<endl;
+            cout<<"Insert Gender : ";
+            cin>>managerGender;
+            cout<<endl;
+            cout<<"Insert Post : ";
+            cin>>managerPost;
+            cout<<endl;
+            cout<<"Insert Salary : ";
+            cin>>managerSalary;
+            cout<<endl;
+            file1<<managerId<<endl;
+            file1<<managerName<<endl;
+            file1<<managerGender<<endl;
+            file1<<managerPost<<endl;
+            file1<<managerSalary<<endl;
         }
         else
-            file1<<managerId<<" "<<managerName<<'\n';
+        {
+            file1<<managerId<<endl;
+            file1<<managerName<<endl;
+            file1<<managerGender<<endl;
+            file1<<managerPost<<endl;
+            file1<<managerSalary<<endl;
+        }
     }
     file.close();
     file1.close();
@@ -182,7 +235,7 @@ void adminModule :: managerUpdate(){
         cout<<"Successfuly Updated\nPress any key to go back"<<'\n';
     else
         cout<<"Not found \nPress any key to go back"<<'\n';
-    getch();
+    getchar();
 }
 void adminModule :: managerDelete(){
     found=0;
@@ -197,13 +250,20 @@ void adminModule :: managerDelete(){
     }
     cout<<"ManagerId to be deleted\n";
     cin>>testId;
-    while(file>>managerId>>managerName)
+    while(file>>managerId)
     {
+        file.ignore();
+        getline(file,managerName);
+        file>>managerGender>>managerPost>>managerSalary;
         if(testId==managerId)
             found=1;
         if(testId!=managerId)
         {
-            file1<<managerId<<" "<<managerName<<'\n';
+            file1<<managerId<<endl;
+            file1<<managerName<<endl;
+            file1<<managerGender<<endl;
+            file1<<managerPost<<endl;
+            file1<<managerSalary<<endl;
         }
     }
     file.close();
