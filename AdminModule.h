@@ -9,7 +9,7 @@ class adminModule
 {
     public:
         int x,n,found;
-        string managerName,managerId,testId;
+        string managerName,managerId,testId, managerGender, managerPost, managerSalary;
         one();
         void menuAdminModule();
         void adminLogin();
