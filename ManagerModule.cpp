@@ -1,13 +1,8 @@
-#include "two.h"
+#include "ManagerModule.h"
 #include <iostream>
-// #include <conio.h>
 using namespace std;
 
-two::two()
-{
-    //ctor
-}
-void two :: menuTwo(){
+void managerModule :: menuManagerModule(){
     cout<<"Admin crud\n"<<'\n';
     cout<<"1 create\n"<<'\n';
     cout<<"2 read\n"<<'\n';
@@ -15,21 +10,20 @@ void two :: menuTwo(){
     cout<<"4 delet\n"<<'\n';
     cout<<"5 Back\n"<<'\n';
     cout<<"6 Exit\n"<<'\n';
-    //ctor
     cin>>x;
     switch(x)
     {
         case 1:
-            create();
+            createEmployee();
             break;
         case 2:
-            read();
+            readEmployee();
             break;
         case 3:
-            update();
+            updateEmployee();
             break;
         case 4:
-            delet();
+            deletEmployee();
             break;
         case 5:
           // menuOne();
@@ -41,15 +35,15 @@ void two :: menuTwo(){
     }
     // getch();
 }
-void two :: create(){
+void managerModule :: createEmployee(){
 
 }
-void two :: read(){
+void managerModule :: readEmployee(){
 
 }
-void two :: update(){
+void managerModule :: updateEmployee(){
 
 }
-void two :: delet(){
+void managerModule :: deletEmployee(){
 
 }

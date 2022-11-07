@@ -1,15 +1,12 @@
-#include "one.h"
+#include "AdminModule.h"
 #include <bits/stdc++.h>
 #include <conio.h>
 #include <fstream>
 using namespace std;
-one::one()
-{
-}
-void  one :: menuOne(){
+void adminModule:: menuAdminModule(){
 
 gg :
-    system("clear");
+    system("cls");
     cout<<"\n\n\t\t\t Main Panel \n";
     cout<<"1 adminLogin\n"<<'\n';
     cout<<"2 managerLogin\n"<<'\n';
@@ -33,20 +30,22 @@ gg :
         default :
             cout<<"Try again\n"<<'\n';
     }
-    getch();
+    getchar();
     goto gg ;
 }
-void one :: adminLogin(){
-    system("clear");
+void adminModule :: adminLogin(){
+    system("cls");
     string managerUser,managerPass;
-    cout<<"Admin username :"<<'\n';
+    cout<<"Admin username : ";
     cin>>managerUser;
-    getch();
-    cout<<"Admin password :"<<'\n';
+    cout<<endl;
+    getchar();
+    cout<<"Admin password : ";
     for (int i = 0; i < 5; i++) {
-        managerPass+=getch();
+        managerPass+=getchar();
         cout<<"*";
     }
+    cout<<endl;
     if(managerUser=="admin" && managerPass == "admin")
     {
         cout<<'\n';
@@ -60,13 +59,13 @@ void one :: adminLogin(){
     }
 
 }
-void one :: managerLogin(){
+void adminModule :: managerLogin(){
 }
-void one :: employeeLogin(){
+void adminModule :: employeeLogin(){
 }
-void one :: adminMenu(){
+void adminModule :: adminMenu(){
 gg :
-    system("clear");
+    system("cls");
     cout<<"\n\n\t\t\t Admin Panel\n";
     cout<<"1 manager create"<<'\n';
     cout<<"2 manager read"<<'\n';
@@ -103,8 +102,8 @@ gg :
     goto gg ;
     getch();
 }
-void one :: managerCreate(){
-    system("clear");
+void adminModule :: managerCreate(){
+    system("cls");
     cout<<"\n\n\t\t\t ManagerCreatepanel \n";
     fstream file;
     cout<<"How many manager to be added ?\n"<<'\n';
@@ -119,8 +118,8 @@ void one :: managerCreate(){
         file.close();
     }
 }
-void one :: managerRead(){
-    system("clear");
+void adminModule :: managerRead(){
+    system("cls");
     fstream file;
     file.open("managerRecord.txt",ios::in);
     cout<<"\n\n\t\t\t\tDisplay Record\n";
@@ -148,9 +147,9 @@ void one :: managerRead(){
     cout<<"\n\n\nPress any key to go back"<<'\n';
     getch();
 }
-void one :: managerUpdate(){
+void adminModule :: managerUpdate(){
     found=0;
-    system("clear");
+    system("cls");
     fstream file,file1;
     file.open("managerRecord.txt",ios::in);
     file1.open("managerRecord1.txt",ios::app|ios::out);
@@ -185,9 +184,9 @@ void one :: managerUpdate(){
         cout<<"Not found \nPress any key to go back"<<'\n';
     getch();
 }
-void one :: managerDelete(){
+void adminModule :: managerDelete(){
     found=0;
-    system("clear");
+    system("cls");
     fstream file,file1;
     file.open("managerRecord.txt",ios::in);
     file1.open("managerRecord1.txt",ios::app|ios::out);
@@ -215,5 +214,5 @@ void one :: managerDelete(){
         cout<<"Successfuly Deleted\nPress any key to go back"<<'\n';
     else
         cout<<"Not found\nPress any key to go back"<<'\n';
-    getch();
+    getchar();
 }
