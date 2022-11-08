@@ -1,14 +1,14 @@
 #include <iostream>
-#include "one.h"
-#include "two.h"
+#include "AdminModule.h"
+#include "ManagerModule.h"
 
 using namespace std;
 
 int main()
 {
-    one ob1;
-    ob1.menuOne();
-    two ob2;
+    adminModule ob1;
+    ob1.menuAdminModule();
+    managerModule ob2;
 //    ob1::menuone();  //how to implement?
     // ob2.menutwo();
 
