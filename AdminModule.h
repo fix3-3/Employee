@@ -1,11 +1,13 @@
 #ifndef AdminModule_H
 #define AdminModule_H
+#include "AdminModule.h"
+#include "ManagerModule.h"
 // #include "two.h"
 #include <bits/stdc++.h>
 using namespace std;
 
 
-class adminModule
+class adminModule : public managerModule
 {
     public:
         int x,n,found;
@@ -25,6 +27,6 @@ class adminModule
             protected:
 
             private:
-        };
+};
 
 #endif // ONE_H
