@@ -64,7 +64,37 @@ void adminModule :: adminLogin(){
 
 }
 void adminModule :: managerLogin(){
+
+
+    system("cls");
+    string Username,Password;
+    cout<<" Manager username : ";
+    cin>>Username;
+    cout<<endl;
+    getchar();
+    cout<<" Manager password : ";
+    for (int i = 0; i < 5; i++) {
+        Password+=getch();
+        cout<<"*";
+    }
+    cout<<endl;
+    if(Username == "green" && Password == "green")
+    {
+        cout<<'\n';
+        cout<<"Login successful\n"<<'\n';
+        cout<<"Admin panel\n"<<'\n';
+       menuManagerModule();
+    }
+    else {
+        cout<<"\nWrong username or password\nPlease Try again\nPress any key to go back\n"<<'\n';
+    }
+
 }
+
+
+
+
+
 void adminModule :: employeeLogin(){
 }
 void adminModule :: adminMenu(){
@@ -161,7 +191,7 @@ void adminModule :: managerRead(){
     fstream file;
     file.open("managerRecord.txt",ios::in);
     cout<<"\n\n\t\t\t\tDisplay Record\n";
-    cout<<"ManagerId"<<" | "<<"ManagerName"<<" | "<<"ManagerGender"<<" | "<<"ManagerPost"<<" | "<<"ManagerSalary"<<'\n';
+    cout<<"ManagerId "<<" | "<<"ManagerName "<<" | "<<"ManagerGender "<<" | "<<"ManagerPost "<<" | "<<"ManagerSalary "<<'\n';
 
     cout<<"--------------------------------------------------------------------------------"<<"\n";
     if(!file)
