@@ -5,7 +5,7 @@ using namespace std;
 void managerModule :: menuManagerModule(){
 gg :
     system("cls");
-    cout<<"Manager crud\n"<<'\n';
+    cout<<" crud\n"<<'\n';
     cout<<"1 create\n"<<'\n';
     cout<<"2 read\n"<<'\n';
     cout<<"3 update\n"<<'\n';
@@ -117,7 +117,106 @@ void managerModule :: readEmployee(){
 }
 void managerModule :: updateEmployee(){
 
+    found=0;
+    system("cls");
+    fstream file,file1;
+    file.open("employeeRecord.txt",ios::in);
+    file1.open("employeeRecord1.txt",ios::app|ios::out);
+    if(!file)
+    {
+        cout<<"You need to insert first \nPress any key\n";
+        // adminMenu(); /*blank 2 freeze*/
+    }
+    cout<<"employeeId to be updaated :\n";
+    cin>>testId;
+    while(file>>employeeId)
+    {
+        file.ignore();
+        getline(file,employeeName);
+        file>>employeeGender>>employeePost>>employeeSalary;
+        if(testId==employeeId)
+        {
+            found=1;
+            cout<<"Insert id :";
+            cin>>employeeId;
+            cout<<endl;
+            cout<<"Insert Name : ";
+            cin.ignore();getline(cin,employeeName);
+            cout<<endl;
+            cout<<"Insert Gender : ";
+            cin>>employeeGender;
+            cout<<endl;
+            cout<<"Insert Post : ";
+            cin>>employeePost;
+            cout<<endl;
+            cout<<"Insert Salary : ";
+            cin>>employeeSalary;
+            cout<<endl;
+            file1<<employeeId<<endl;
+            file1<<employeeName<<endl;
+            file1<<employeeGender<<endl;
+            file1<<employeePost<<endl;
+            file1<<employeeSalary<<endl;
+        }
+        else
+        {
+            file1<<employeeId<<endl;
+            file1<<employeeName<<endl;
+            file1<<employeeGender<<endl;
+            file1<<employeePost<<endl;
+            file1<<employeeSalary<<endl;
+        }
+    }
+    file.close();
+    file1.close();
+    remove("employeeRecord.txt");
+    rename("employeeRecord1.txt","employeeRecord.txt");
+    if(found)
+        cout<<"Successfuly Updated\nPress any key to go back"<<'\n';
+    else
+        cout<<"Not found \nPress any key to go back"<<'\n';
+    getchar();
+
+
+
 }
 void managerModule :: deletEmployee(){
+    found=0;
+    system("cls");
+    fstream file,file1;
+    file.open("employeeRecord.txt",ios::in);
+    file1.open("employeeRecord1.txt",ios::app|ios::out);
+    if(!file)
+    {
+        cout<<"You need to insert first \nPress any key\n";
+        // adminMenu(); /*blank 2 freeze*/
+    }
+    cout<<"employeeId to be deleted\n";
+    cin>>testId;
+    while(file>>employeeId)
+    {
+        file.ignore();
+        getline(file,employeeName);
+        file>>employeeGender>>employeePost>>employeeSalary;
+        if(testId==employeeId)
+            found=1;
+        if(testId!=employeeId)
+        {
+            file1<<employeeId<<endl;
+            file1<<employeeName<<endl;
+            file1<<employeeGender<<endl;
+            file1<<employeePost<<endl;
+            file1<<employeeSalary<<endl;
+        }
+    }
+    file.close();
+    file1.close();
+    remove("employeeRecord.txt");
+    rename("employeeRecord1.txt","employeeRecord.txt");
+    if(found)
+        cout<<"Successfuly Deleted\nPress any key to go back"<<'\n';
+    else
+        cout<<"Not found\nPress any key to go back"<<'\n';
+    getchar();
 
 }
