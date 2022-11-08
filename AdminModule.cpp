@@ -3,6 +3,10 @@
 #include <conio.h>
 #include <fstream>
 using namespace std;
+adminModule :: adminModule()
+{
+    adminUsername = "admin"; adminPass = "admin";
+}
 void adminModule:: menuAdminModule(){
 
 gg :
@@ -35,18 +39,18 @@ gg :
 }
 void adminModule :: adminLogin(){
     system("cls");
-    string managerUser,managerPass;
+    string Username,Password;
     cout<<"Admin username : ";
-    cin>>managerUser;
+    cin>>Username;
     cout<<endl;
     getchar();
     cout<<"Admin password : ";
     for (int i = 0; i < 5; i++) {
-        managerPass+=getchar();
-        //cout<<"*";
+        Password+=getch();
+        cout<<"*";
     }
     cout<<endl;
-    if(managerUser=="admin" && managerPass == "admin")
+    if(Username==adminUsername && Password ==adminPass)
     {
         cout<<'\n';
         cout<<"Login successful\n"<<'\n';
@@ -71,8 +75,9 @@ gg :
     cout<<"2 manager read"<<'\n';
     cout<<"3 manager update"<<'\n';
     cout<<"4 manager delete"<<'\n';
-    cout<<"5 back"<<'\n';
-    cout<<"6 exit"<<'\n';
+    cout<<"5 admin username and password change"<<'\n';
+    cout<<"6 back"<<'\n';
+    cout<<"7 exit"<<'\n';
     //ctor
     cin>>x;
     switch(x)
@@ -93,14 +98,31 @@ gg :
             getch();
             break;
         case 5:
+            adminPassUserChange();
             return;
+            break;
         case 6:
+            return;
+        case 7:
             exit(0);
+
         default :
             cout<<"Try again\n"<<'\n';
     }
     goto gg ;
     getch();
+}
+void adminModule :: adminPassUserChange()
+{
+    system("cls");
+    cout<<"\n\n\t\t\t Reseting Username and Password \n";
+    cout<<endl<<endl;
+    cout<<"Enter New Username : ";
+    cin>>adminUsername;
+    cout<<endl;
+    cout<<"Enter New Password : ";
+    cin>>adminPass;
+    cout<<endl;
 }
 void adminModule :: managerCreate(){
     system("cls");

@@ -9,8 +9,8 @@ class adminModule
 {
     public:
         int x,n,found;
-        string managerName,managerId,testId, managerGender, managerPost, managerSalary;
-        one();
+        string managerName,managerId,testId, managerGender, managerPost, managerSalary, adminUsername, adminPass;
+        adminModule();
         void menuAdminModule();
         void adminLogin();
         void managerLogin();
@@ -20,6 +20,7 @@ class adminModule
         void managerRead();
         void managerUpdate();
         void managerDelete();
+        void adminPassUserChange();
 
             protected:
 
