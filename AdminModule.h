@@ -1,17 +1,17 @@
-#ifndef ONE_H
-#define ONE_H
+#ifndef AdminModule_H
+#define AdminModule_H
 // #include "two.h"
 #include <bits/stdc++.h>
 using namespace std;
 
 
-class one
+class adminModule
 {
     public:
         int x,n,found;
-        string managerName,managerId,testId;
-        one();
-        void menuOne();
+        string managerName,managerId,testId, managerGender, managerPost, managerSalary, adminUsername, adminPass;
+        adminModule();
+        void menuAdminModule();
         void adminLogin();
         void managerLogin();
         void employeeLogin();
@@ -20,6 +20,7 @@ class one
         void managerRead();
         void managerUpdate();
         void managerDelete();
+        void adminPassUserChange();
 
             protected:
 
