@@ -9,7 +9,7 @@ using namespace std;
 class managerModule
 {
     public:
-        int n,x;
+        int n,x,found;
         string employeeName,employeeId,testId,employeeGender, employeePost, employeeSalary;
 
         //two();
