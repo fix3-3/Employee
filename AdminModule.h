@@ -2,12 +2,13 @@
 #define AdminModule_H
 #include "AdminModule.h"
 #include "ManagerModule.h"
+#include "Employee.h"
 // #include "two.h"
 #include <bits/stdc++.h>
 using namespace std;
 
 
-class adminModule : public managerModule
+class adminModule : public managerModule , public Employee
 {
     public:
         int x,n,found;
@@ -16,7 +17,7 @@ class adminModule : public managerModule
         void menuAdminModule();
         void adminLogin();
         void managerLogin();
-        void employeeLogin();
+        //void employeeLogin();
         void adminMenu();
         void managerCreate();
         void managerRead();
