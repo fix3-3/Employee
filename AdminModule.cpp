@@ -95,8 +95,9 @@ void adminModule :: managerLogin(){
 
 
 
-void adminModule :: employeeLogin(){
-}
+//void adminModule :: employeeLogin(){
+    //showDetails();
+//}
 void adminModule :: adminMenu(){
 gg :
     system("cls");
