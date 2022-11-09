@@ -1,11 +1,17 @@
 #ifndef MANAGERMODULE_H
 #define MANAGERMODULE_H
+#include "ManagerModule.h"
+#include<bits/stdc++.h>
+using namespace std;
+
 // #include "one.h"
 
 class managerModule
 {
     public:
-        int x;
+        int n,x,found;
+        string employeeName,employeeId,testId,employeeGender, employeePost, employeeSalary;
+
         //two();
         void menuManagerModule();
         void createEmployee();
