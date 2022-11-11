@@ -107,7 +107,7 @@ gg :
     cout<<"3 manager update"<<'\n';
     cout<<"4 manager delete"<<'\n';
     cout<<"5 admin username and password change"<<'\n';
-    cout<<"6 back"<<'\n';
+    cout<<"6 logout"<<'\n';
     cout<<"7 exit"<<'\n';
     //ctor
     cin>>x;
