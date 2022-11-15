@@ -159,12 +159,20 @@ void adminModule :: managerCreate(){
     system("cls|clear");
     cout<<"\n\n\t\t\t ManagerCreatepanel \n";
     fstream file;
+    file.open("usedId.txt",ios::in);
+    file>>usedID;
+    file.close();
     cout<<"How many manager to be added ?\n"<<'\n';
     cin>>n;
     for(int i=0;i<n;i++){
-        cout<<"Insert id :";
-        cin>>managerId;
-        cout<<endl;
+        usedID++;
+        cout<<"ID : "<<usedID<<'\n';
+        file.open("usedId.txt",ios::out);
+        file<<usedID;
+        file.close();
+        // cout<<"Insert id :";
+        // cin>>managerId;
+        // cout<<endl;
         cout<<"Insert Name : ";
         cin.ignore();getline(cin,managerName);
         cout<<endl;
@@ -179,7 +187,8 @@ void adminModule :: managerCreate(){
         cout<<endl;
 
         file.open("managerRecord.txt",ios::app|ios::out);
-        file<<managerId<<endl;
+        file<<usedID<<endl;
+        // file<<managerId<<endl;
         file<<managerName<<endl;
         file<<managerGender<<endl;
         file<<managerPost<<endl;
@@ -231,6 +240,7 @@ void adminModule :: managerRead(){
 }
 void adminModule :: managerUpdate(){
     found=0;
+   int  updateNo;
     system("cls|clear");
     fstream file,file1;
     file.open("managerRecord.txt",ios::in);
@@ -250,21 +260,39 @@ void adminModule :: managerUpdate(){
         if(testId==managerId)
         {
             found=1;
-            cout<<"Insert id :";
-            cin>>managerId;
-            cout<<endl;
+            // cout<<"Insert id :";
+            // cin>>managerId;
+            // cout<<endl;
+            cout<<"1 new name"<<'\n';
+            cout<<"2 new gender"<<'\n';
+            cout<<"3 new post"<<'\n';
+            cout<<"4 new salary"<<'\n';
+            cin>>updateNo;
+            if(updateNo==1)
+            {
             cout<<"Insert Name : ";
-            cin.ignore();getline(cin,managerName);
+            cin.ignore();
+            getline(cin,managerName);
             cout<<endl;
+            }
+            else if(updateNo==2)
+            {
             cout<<"Insert Gender : ";
             cin>>managerGender;
             cout<<endl;
+            }
+            else if(updateNo==3)
+            {
             cout<<"Insert Post : ";
             cin>>managerPost;
             cout<<endl;
+            }
+            else if(updateNo==4)
+            {
             cout<<"Insert Salary : ";
             cin>>managerSalary;
             cout<<endl;
+            }
             file1<<managerId<<endl;
             file1<<managerName<<endl;
             file1<<managerGender<<endl;
@@ -288,6 +316,7 @@ void adminModule :: managerUpdate(){
         cout<<"Successfuly Updated\nPress any key to go back"<<'\n';
     else
         cout<<"Not found \nPress any key to go back"<<'\n';
+    if(updateNo!=1)
     getchar();
 }
 void adminModule :: managerDelete(){

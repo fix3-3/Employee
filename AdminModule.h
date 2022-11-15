@@ -12,6 +12,7 @@ class adminModule : public managerModule , public Employee
 {
     public:
         int x,n,found;
+        int usedID;
         string managerName,managerId,testId, managerGender, managerPost, managerSalary, adminUsername, adminPass;
         adminModule();
         void menuAdminModule();
