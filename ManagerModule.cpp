@@ -4,7 +4,7 @@ using namespace std;
 
 void managerModule :: menuManagerModule(){
 gg :
-    system("cls|clear");
+    system("cls");
     cout<<" crud\n"<<'\n';
     cout<<"1 create\n"<<'\n';
     cout<<"2 read\n"<<'\n';
@@ -40,7 +40,7 @@ gg :
     goto gg ;
 }
 void managerModule :: createEmployee(){
-    system("cls|clear");
+    system("cls");
     cout<<"\n\n\t\t\t employeeCreatepanel \n";
     fstream file;
     cout<<"How many employee to be added ?\n"<<'\n';
@@ -73,7 +73,7 @@ void managerModule :: createEmployee(){
        }
 }
 void managerModule :: readEmployee(){
-    system("cls|clear");
+    system("cls");
     fstream file;
     file.open("employeeRecord.txt",ios::in);
     cout<<"\n\n\t\t\t\tDisplay Record\n";
@@ -118,7 +118,7 @@ void managerModule :: readEmployee(){
 void managerModule :: updateEmployee(){
 
     found=0;
-    system("cls|clear");
+    system("cls");
     fstream file,file1;
     file.open("employeeRecord.txt",ios::in);
     file1.open("employeeRecord1.txt",ios::app|ios::out);
@@ -182,7 +182,7 @@ void managerModule :: updateEmployee(){
 }
 void managerModule :: deletEmployee(){
     found=0;
-    system("cls|clear");
+    system("cls");
     fstream file,file1;
     file.open("employeeRecord.txt",ios::in);
     file1.open("employeeRecord1.txt",ios::app|ios::out);

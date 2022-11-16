@@ -10,7 +10,7 @@ adminModule :: adminModule()
 void adminModule:: menuAdminModule(){
 
 gg :
-    system("cls|clear");
+    system("cls");
     cout<<"\n\n\t\t\t Main Panel \n";
     cout<<"1 adminLogin\n"<<'\n';
     cout<<"2 managerLogin\n"<<'\n';
@@ -38,7 +38,7 @@ gg :
     goto gg ;
 }
 void adminModule :: adminLogin(){
-    system("cls|clear");
+    system("cls");
     string Username,Password;
     cout<<"Admin username : ";
     cin>>Username;
@@ -66,7 +66,7 @@ void adminModule :: adminLogin(){
 void adminModule :: managerLogin(){
 
 
-    system("cls|clear");
+    system("cls");
     string Username,Password;
     cout<<" Manager username : ";
     cin>>Username;
@@ -100,7 +100,7 @@ void adminModule :: managerLogin(){
 //}
 void adminModule :: adminMenu(){
 gg :
-    system("cls|clear");
+    system("cls");
     cout<<"\n\n\t\t\t Admin Panel\n";
     cout<<"1 manager create"<<'\n';
     cout<<"2 manager read"<<'\n';
@@ -145,7 +145,7 @@ gg :
 }
 void adminModule :: adminPassUserChange()
 {
-    system("cls|clear");
+    system("cls");
     cout<<"\n\n\t\t\t Reseting Username and Password \n";
     cout<<endl<<endl;
     cout<<"Enter New Username : ";
@@ -156,7 +156,7 @@ void adminModule :: adminPassUserChange()
     cout<<endl;
 }
 void adminModule :: managerCreate(){
-    system("cls|clear");
+    system("cls");
     cout<<"\n\n\t\t\t ManagerCreatepanel \n";
     fstream file;
     file.open("usedId.txt",ios::in);
@@ -197,7 +197,7 @@ void adminModule :: managerCreate(){
     }
 }
 void adminModule :: managerRead(){
-    system("cls|clear");
+    system("cls");
     fstream file;
     file.open("managerRecord.txt",ios::in);
     cout<<"\n\n\t\t\t\tDisplay Record\n";
@@ -241,7 +241,7 @@ void adminModule :: managerRead(){
 void adminModule :: managerUpdate(){
     found=0;
    int  updateNo;
-    system("cls|clear");
+    system("cls");
     fstream file,file1;
     file.open("managerRecord.txt",ios::in);
     file1.open("managerRecord1.txt",ios::app|ios::out);
@@ -321,7 +321,7 @@ void adminModule :: managerUpdate(){
 }
 void adminModule :: managerDelete(){
     found=0;
-    system("cls|clear");
+    system("cls");
     fstream file,file1;
     file.open("managerRecord.txt",ios::in);
     file1.open("managerRecord1.txt",ios::app|ios::out);
