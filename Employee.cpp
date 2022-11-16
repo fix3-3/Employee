@@ -35,7 +35,7 @@ void Employee :: employeeLogin(){
 
  void Employee :: showDetails(){
 
-     system("cls|clear");
+     system("cls");
 
      fstream f,f1;
         f.open("employeeRecord.txt");
