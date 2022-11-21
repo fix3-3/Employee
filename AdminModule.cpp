@@ -5,7 +5,7 @@
 using namespace std;
 adminModule :: adminModule()
 {
-    adminUsername = "admin"; adminPass = "admin";
+    //adminUsername = "admin"; adminPass = "admin";
 }
 void adminModule:: menuAdminModule(){
 
@@ -40,6 +40,11 @@ gg :
 void adminModule :: adminLogin(){
     system("cls");
     string Username,Password;
+    fstream file;
+    file.open("AdminPassword.txt",ios::in);
+    file>>adminUsername;
+    file>>adminPass;
+    file.close();
     cout<<"Admin username : ";
     cin>>Username;
     cout<<endl;
@@ -50,6 +55,11 @@ void adminModule :: adminLogin(){
         cout<<"*";
     }
     cout<<endl;
+    cout<<endl;
+    //cin.ignore();
+    //cout<<endl;
+    cout<<"Enter to proceed . . . . ."<<endl;
+    getch();
     if(Username==adminUsername && Password ==adminPass)
     {
         cout<<'\n';
@@ -147,6 +157,7 @@ void adminModule :: adminPassUserChange()
 {
     system("cls");
     cout<<"\n\n\t\t\t Reseting Username and Password \n";
+    string confirmPass;
     cout<<endl<<endl;
     cout<<"Enter New Username : ";
     cin>>adminUsername;
@@ -154,38 +165,87 @@ void adminModule :: adminPassUserChange()
     cout<<"Enter New Password : ";
     cin>>adminPass;
     cout<<endl;
+    cout<<"Confirm New Password : ";
+    cin>>confirmPass;
+    if(adminPass==confirmPass){
+        fstream file;
+        file.open("AdminPassword.txt",ios::out);
+        file<<adminUsername<<endl;
+        file<<adminPass;
+        cout<<endl;
+        cout<<"Successfully Changed"<<endl;
+        file.close();
+    }
+    else
+    {
+        cout<<endl;
+        cout<<"Unable to change due to mismatch in Confirm Password"<<endl;
+    }
+    cout<<"Enter any Key to go back"<<endl;
+    getchar();
 }
 void adminModule :: managerCreate(){
     system("cls");
-    cout<<"\n\n\t\t\t ManagerCreatepanel \n";
+    cout<<"\n\n\t\t\t ManagerCreatepanel \n"<<endl<<endl;
     fstream file;
-    file.open("usedId.txt",ios::in);
+    file.open("MangerUsedId.txt",ios::in);
     file>>usedID;
     file.close();
     cout<<"How many manager to be added ?\n"<<'\n';
     cin>>n;
     for(int i=0;i<n;i++){
+        system("cls");
+        cout<<"\n\n\t\t\t ManagerCreatepanel \n"<<endl<<endl;
         usedID++;
         cout<<"ID : "<<usedID<<'\n';
-        file.open("usedId.txt",ios::out);
+        fstream file1;
+        file.open("MangerUsedId.txt",ios::out);
         file<<usedID;
         file.close();
         // cout<<"Insert id :";
         // cin>>managerId;
         // cout<<endl;
         cout<<"Insert Name : ";
-        cin.ignore();getline(cin,managerName);
+        //cin.ignore();
+        while(1){
+            getline(cin,managerName);
+            if(managerName.length()!=0)
+            {
+                break;
+            }
+        }
         cout<<endl;
         cout<<"Insert Gender : ";
-        cin>>managerGender;
+        while(1){
+            cin>>managerGender;
+            if(managerName.length()!=0)
+            {
+                break;
+            }
+        }
         cout<<endl;
         cout<<"Insert Post : ";
-        cin>>managerPost;
+        while(1){
+            cin>>managerPost;
+            if(managerName.length()!=0)
+            {
+                break;
+            }
+        }
         cout<<endl;
         cout<<"Insert Salary : ";
-        cin>>managerSalary;
+        while(1){
+            cin>>managerSalary;
+            if(managerName.length()!=0)
+            {
+                break;
+            }
+        }
         cout<<endl;
-
+        file1.open("MangerPass.txt",ios::app|ios::out);
+        file1<<managerName+to_string(usedID)<<endl;
+        file1<<managerName+to_string(usedID)<<endl;
+        file1.close();
         file.open("managerRecord.txt",ios::app|ios::out);
         file<<usedID<<endl;
         // file<<managerId<<endl;
@@ -194,7 +254,14 @@ void adminModule :: managerCreate(){
         file<<managerPost<<endl;
         file<<managerSalary<<endl;
         file.close();
+        cout<<endl;
+        cout<<"Succesfully New Manager is Added"<<endl;
+        getchar();
+        if(i!=n-1)
+        getchar();
     }
+    cout<<endl<<"Press any key to go back"<<endl;
+    getchar();
 }
 void adminModule :: managerRead(){
     system("cls");
