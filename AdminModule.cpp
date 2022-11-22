@@ -114,10 +114,6 @@ void adminModule :: managerLogin(){
 }
 
 
-
-
-
-
 void adminModule :: adminMenu(){
 gg :
     system("cls");
@@ -163,6 +159,8 @@ gg :
     goto gg ;
     getch();
 }
+
+
 void adminModule :: adminPassUserChange()
 {
     system("cls");
@@ -194,6 +192,8 @@ void adminModule :: adminPassUserChange()
     cout<<"Enter any Key to go back"<<endl;
     getchar();
 }
+
+
 void adminModule :: managerCreate(){
     system("cls");
     cout<<"\n\n\t\t\t ManagerCreatepanel \n"<<endl<<endl;
@@ -268,6 +268,8 @@ void adminModule :: managerCreate(){
     cout<<endl<<"Press any key to go back"<<endl;
     getchar();
 }
+
+
 void adminModule :: managerRead(){
     system("cls");
     fstream file;
