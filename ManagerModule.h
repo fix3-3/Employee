@@ -18,6 +18,7 @@ class managerModule
         void readEmployee();
         void updateEmployee();
         void deletEmployee();
+        void changeManagerPass();
     protected:
 
     private:

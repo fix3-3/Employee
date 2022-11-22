@@ -5,13 +5,14 @@ using namespace std;
 void managerModule :: menuManagerModule(){
 gg :
     system("cls");
-    cout<<" crud\n"<<'\n';
-    cout<<"1 create\n"<<'\n';
-    cout<<"2 read\n"<<'\n';
-    cout<<"3 update\n"<<'\n';
-    cout<<"4 delet\n"<<'\n';
-    cout<<"5 Back\n"<<'\n';
-    cout<<"6 Exit\n"<<'\n';
+    cout<<" Employee CRUD\n"<<'\n';
+    cout<<"1 Create New Employee\n"<<'\n';
+    cout<<"2 Read Employee\n"<<'\n';
+    cout<<"3 Update Employee\n"<<'\n';
+    cout<<"4 Delete An Employee\n"<<'\n';
+    cout<<"5 Change Username And Password\n"<<'\n';
+    cout<<"6 Back\n"<<'\n';
+    cout<<"7 Exit\n"<<'\n';
     cin>>x;
     switch(x)
     {
@@ -28,9 +29,11 @@ gg :
             deletEmployee();
             break;
         case 5:
-          // menuOne();
+            changeManagerPass();
             break;
         case 6:
+            return;
+        case 7:
             exit(0);
         default :
             cout<<"Try again\n"<<'\n';
@@ -39,6 +42,173 @@ gg :
      getchar();
     goto gg ;
 }
+void managerModule :: changeManagerPass()
+{
+    system("cls");
+    cout<<"\n\n\t\t\t Reseting Username and Password \n";
+    string confirmPass, newUsername, newPassword, checkusername, oldUsername, oldPassword, username, password;
+    int choice, flag = 1;
+    cout<<endl;
+    cout<<"* Enter 1 to change Username"<<endl;
+    cout<<"* Enter 2 to change Password"<<endl;
+    cout<<"* Enter 3 to go back"<<endl;
+    cin>>choice;
+    if(choice==1)
+    {
+        system("cls");
+        cout<<"\n\n\t\t\t Reseting Username \n"<<endl;
+        cout<<"Enter Your Existing Username : ";
+        cin>>oldUsername;
+        cout<<endl;
+        cout<<"Enter Your Existing Password : ";
+        for(int i = 1; i<=50; i++)
+        {
+            char c;
+            c = getch();
+            if(c==13)break;
+            oldPassword+=c;
+            cout<<"*";
+        }
+        cout<<endl;
+        cout<<"Enter New Username Without any Space : ";
+        cin>>newUsername;
+        cout<<endl;
+        ifstream file;
+        file.open("MangerPass.txt");
+        while(file>>checkusername>>password)
+        {
+            if(checkusername==newUsername)
+            {
+                flag = 0;
+                break;
+            }
+        }
+        file.close();
+        if(flag)
+        {
+            fstream file,file1;
+            int flag1 = 0;
+            file.open("MangerPass.txt",ios::in);
+            file1.open("ManagerPass.txt",ios::app|ios::out);
+            while(file>>username>>password)
+            {
+                if(username==oldUsername && oldPassword==password )
+                {
+                    flag1 = 1;
+                    file1<<newUsername<<endl;
+                    file1<<password<<endl;
+                }
+                else
+                {
+                    file1<<username<<endl;
+                    file1<<password<<endl;
+                }
+            }
+            file.close();
+            file1.close();
+            remove("MangerPass.txt");
+            rename("ManagerPass.txt","MangerPass.txt");
+            if(flag1){
+                cout<<"Username Is Updated"<<endl<<endl;
+            }
+            else
+            {
+                cout<<"Cannot Update As Old Password and Username Does Not Match"<<endl<<endl;
+            }
+        }
+        else
+        {
+            cout<<"Cannot Update As ";
+            cout<<"New Username Already Exist"<<endl<<endl;
+        }
+        cout<<"Press Any Key To Go Back"<<endl;
+        getchar();
+
+    }
+    else if(choice==2)
+    {
+        system("cls");
+        int f = 0;
+        cout<<"\n\n\t\t\t Reseting Password \n"<<endl;
+        cout<<"Enter Your Existing Username : ";
+        cin>>oldUsername;
+        cout<<"Enter Your Existing Password : ";
+        for(int i = 1; i<=50; i++)
+        {
+            char c;
+            c = getch();
+            if(c==13)break;
+            oldPassword+=c;
+            cout<<"*";
+        }
+
+        cout<<endl;
+        cout<<"Enter New Password : ";
+        for(int i = 1; i<=50; i++)
+        {
+            char c;
+            c = getch();
+            if(c==13)break;
+            newPassword+=c;
+            cout<<"*";
+        }
+        cout<<endl;
+        cout<<"Confirm Password : ";
+        for(int i = 1; i<=50; i++)
+        {
+            char c;
+            c = getch();
+            if(c==13)break;
+            confirmPass+=c;
+            cout<<"*";
+        }
+        cout<<endl;
+        if(newPassword!=confirmPass)f = 2;
+
+        fstream file,file1;
+        file.open("MangerPass.txt",ios::in);
+        file1.open("ManagerPass.txt",ios::app|ios::out);
+        while(file>>username>>password)
+        {
+            if(username==oldUsername && oldPassword==password && newPassword==confirmPass)
+            {
+                    f = 1;
+                    file1<<username<<endl;
+                    file1<<newPassword<<endl;
+            }
+            else
+            {
+                    file1<<username<<endl;
+                    file1<<password<<endl;
+            }
+        }
+        file.close();
+        file1.close();
+        remove("MangerPass.txt");
+        rename("ManagerPass.txt","MangerPass.txt");
+        if(f==1){cout<<"Password Is Updated"<<endl<<endl;}
+        else if(f==2){cout<<"New Password Is Not Same As Confirm Password"<<endl<<endl;}
+        else
+        {
+            cout<<"Cannot Update as Username Does Not Exist"<<endl<<endl;
+        }
+        cout<<"Press Any Key To Go Back"<<endl;
+        getchar();
+    }
+    else if(choice==3)
+    {
+        return;
+    }
+    else
+    {
+        cout<<"Invalid Choice"<<endl;
+        cout<<endl<<"Enter any Key to Go Back"<<endl;
+        getchar();
+    }
+
+}
+
+
 void managerModule :: createEmployee(){
     system("cls");
     cout<<"\n\n\t\t\t employeeCreatepanel \n";

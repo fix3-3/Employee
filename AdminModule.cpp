@@ -12,9 +12,9 @@ void adminModule:: menuAdminModule(){
 gg :
     system("cls");
     cout<<"\n\n\t\t\t Main Panel \n";
-    cout<<"1 adminLogin\n"<<'\n';
-    cout<<"2 managerLogin\n"<<'\n';
-    cout<<"3 employeeLogin\n"<<'\n';
+    cout<<"1 AdminLogin\n"<<'\n';
+    cout<<"2 ManagerLogin\n"<<'\n';
+    cout<<"3 EmployeeLogin\n"<<'\n';
     cout<<"4 Exit\n"<<'\n';
     //ctor
     cin>>x;
@@ -50,14 +50,15 @@ void adminModule :: adminLogin(){
     cout<<endl;
     getchar();
     cout<<"Admin password : ";
-    for (int i = 0; i < 5; i++) {
-        Password+=getch();
+    for (int i = 0; i < 50; i++) {
+        char c;
+        c = getch();
+        if(c==13)break;
+        Password+=c;
         cout<<"*";
     }
     cout<<endl;
     cout<<endl;
-    //cin.ignore();
-    //cout<<endl;
     cout<<"Enter to proceed . . . . ."<<endl;
     getch();
     if(Username==adminUsername && Password ==adminPass)
@@ -77,25 +78,35 @@ void adminModule :: managerLogin(){
 
 
     system("cls");
-    string Username,Password;
+    string Username,Password, filePassword, fileUsername;
+    int flag = 0;
     cout<<" Manager username : ";
     cin>>Username;
     cout<<endl;
     getchar();
     cout<<" Manager password : ";
-    for (int i = 0; i < 5; i++) {
-        Password+=getch();
+    for (int i = 0; i < 50; i++) {
+        char c;
+        c = getch();
+        if(c==13)break;
+        Password+=c;
         cout<<"*";
     }
     cout<<endl;
-    if(Username == "green" && Password == "green")
-    {
-        cout<<'\n';
-        cout<<"Login successful\n"<<'\n';
-        cout<<"Admin panel\n"<<'\n';
-       menuManagerModule();
+    fstream file;
+    file.open("MangerPass.txt", ios :: in);
+    while(file>>fileUsername>>filePassword){
+        if(Username == fileUsername && Password == filePassword)
+        {
+            flag = 1;
+            cout<<'\n';
+            cout<<" Login successful\n"<<'\n';
+            cout<<" Enter to continue\n"<<'\n';
+            getchar();
+            menuManagerModule();
+        }
     }
-    else {
+    if(flag==0){
         cout<<"\nWrong username or password\nPlease Try again\nPress any key to go back\n"<<'\n';
     }
 
@@ -105,18 +116,16 @@ void adminModule :: managerLogin(){
 
 
 
-//void adminModule :: employeeLogin(){
-    //showDetails();
-//}
+
 void adminModule :: adminMenu(){
 gg :
     system("cls");
     cout<<"\n\n\t\t\t Admin Panel\n";
-    cout<<"1 manager create"<<'\n';
-    cout<<"2 manager read"<<'\n';
-    cout<<"3 manager update"<<'\n';
-    cout<<"4 manager delete"<<'\n';
-    cout<<"5 admin username and password change"<<'\n';
+    cout<<"1 Create Manager"<<'\n';
+    cout<<"2 Read Manager"<<'\n';
+    cout<<"3 Update Manager"<<'\n';
+    cout<<"4 Delete Manager"<<'\n';
+    cout<<"5 Admin Username And Password Change"<<'\n';
     cout<<"6 logout"<<'\n';
     cout<<"7 exit"<<'\n';
     //ctor
@@ -202,11 +211,7 @@ void adminModule :: managerCreate(){
         file.open("MangerUsedId.txt",ios::out);
         file<<usedID;
         file.close();
-        // cout<<"Insert id :";
-        // cin>>managerId;
-        // cout<<endl;
         cout<<"Insert Name : ";
-        //cin.ignore();
         while(1){
             getline(cin,managerName);
             if(managerName.length()!=0)
@@ -218,7 +223,7 @@ void adminModule :: managerCreate(){
         cout<<"Insert Gender : ";
         while(1){
             cin>>managerGender;
-            if(managerName.length()!=0)
+            if(managerGender.length()!=0)
             {
                 break;
             }
@@ -226,8 +231,8 @@ void adminModule :: managerCreate(){
         cout<<endl;
         cout<<"Insert Post : ";
         while(1){
-            cin>>managerPost;
-            if(managerName.length()!=0)
+            getline(cin,managerPost);
+            if(managerPost.length()!=0)
             {
                 break;
             }
@@ -236,19 +241,18 @@ void adminModule :: managerCreate(){
         cout<<"Insert Salary : ";
         while(1){
             cin>>managerSalary;
-            if(managerName.length()!=0)
+            if(managerSalary.length()!=0)
             {
                 break;
             }
         }
         cout<<endl;
         file1.open("MangerPass.txt",ios::app|ios::out);
-        file1<<managerName+to_string(usedID)<<endl;
-        file1<<managerName+to_string(usedID)<<endl;
+        file1<<to_string(usedID)<<endl;
+        file1<<to_string(usedID)<<endl;
         file1.close();
         file.open("managerRecord.txt",ios::app|ios::out);
         file<<usedID<<endl;
-        // file<<managerId<<endl;
         file<<managerName<<endl;
         file<<managerGender<<endl;
         file<<managerPost<<endl;
@@ -303,7 +307,7 @@ void adminModule :: managerRead(){
     }
     file.close();
     cout<<"\n\n\nPress any key to go back"<<'\n';
-    getch();
+    getchar();
 }
 void adminModule :: managerUpdate(){
     found=0;
@@ -327,9 +331,6 @@ void adminModule :: managerUpdate(){
         if(testId==managerId)
         {
             found=1;
-            // cout<<"Insert id :";
-            // cin>>managerId;
-            // cout<<endl;
             cout<<"1 new name"<<'\n';
             cout<<"2 new gender"<<'\n';
             cout<<"3 new post"<<'\n';
@@ -337,28 +338,54 @@ void adminModule :: managerUpdate(){
             cin>>updateNo;
             if(updateNo==1)
             {
-            cout<<"Insert Name : ";
-            cin.ignore();
-            getline(cin,managerName);
-            cout<<endl;
+                cout<<"Insert Name : ";
+                while(1){
+                    getline(cin,managerName);
+                    if(managerName.length()!=0)
+                    {
+                        break;
+                    }
+                }
+                cout<<endl;
             }
             else if(updateNo==2)
             {
-            cout<<"Insert Gender : ";
-            cin>>managerGender;
-            cout<<endl;
+                cout<<"Insert Gender : ";
+                while(1){
+                    cin>>managerGender;
+                    if(managerGender.length()!=0)
+                    {
+                        break;
+                    }
+                }
+                cout<<endl;
             }
             else if(updateNo==3)
             {
-            cout<<"Insert Post : ";
-            cin>>managerPost;
-            cout<<endl;
+                cout<<"Insert Post : ";
+                while(1)
+                {
+                    getline(cin,managerPost);
+                    if(managerPost.length()!=0)
+                    {
+                        break;
+                    }
+                }
+                cout<<endl;
+
             }
             else if(updateNo==4)
             {
-            cout<<"Insert Salary : ";
-            cin>>managerSalary;
-            cout<<endl;
+                cout<<"Insert Salary : ";
+                while(1)
+                {
+                    cin>>managerSalary;
+                    if(managerSalary.length()!=0)
+                    {
+                        break;
+                    }
+                }
+                cout<<endl;
             }
             file1<<managerId<<endl;
             file1<<managerName<<endl;
