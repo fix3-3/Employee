@@ -10,6 +10,7 @@ class managerModule
 {
     public:
         int n,x,found;
+        int employeeusedID;   //****
         string employeeName,employeeId,testId,employeeGender, employeePost, employeeSalary;
 
         //two();

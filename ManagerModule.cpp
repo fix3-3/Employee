@@ -1,5 +1,6 @@
 #include "ManagerModule.h"
 #include <iostream>
+#include<windows.h>
 using namespace std;
 
 void managerModule :: menuManagerModule(){
@@ -11,7 +12,7 @@ gg :
     cout<<"3 Update Employee\n"<<'\n';
     cout<<"4 Delete An Employee\n"<<'\n';
     cout<<"5 Change Username And Password\n"<<'\n';
-    cout<<"6 Back\n"<<'\n';
+    cout<<"6 Logout\n"<<'\n';
     cout<<"7 Exit\n"<<'\n';
     cin>>x;
     switch(x)
@@ -38,8 +39,8 @@ gg :
         default :
             cout<<"Try again\n"<<'\n';
     }
-    // getch();
-     getchar();
+
+    getchar();
     goto gg ;
 }
 void managerModule :: changeManagerPass()
@@ -64,11 +65,7 @@ void managerModule :: changeManagerPass()
         i++;
     }
     int n = 0;
-    /*while(n<3)
-    {
-        cout<<user[n]<<endl;
-        n++;
-    }*/
+
     read.close();
 
     if(choice==1)
@@ -91,16 +88,7 @@ void managerModule :: changeManagerPass()
         cout<<"Enter New Username Without any Space : ";
         cin>>newUsername;
         cout<<endl;
-        //fstream file;
-        //file.open("MangerPass.txt",ios::in);
-        /*while(file>>checkusername>>password)
-        {
-            if(checkusername==newUsername)
-            {
-                flag = 0;
-                break;
-            }
-        }*/
+
         for(int j = 0; j<i; j++)
         {
             if(user[j]==newUsername)
@@ -125,23 +113,16 @@ void managerModule :: changeManagerPass()
                     flag1 = 1;
                     file<<newUsername<<endl;
                     file<<pass[j]<<endl;
-                    //file2<<newUsername<<endl;
-                    //file2<<password<<endl;
 
                 }
                 else
                 {
                     file<<user[j]<<endl;
                     file<<pass[j]<<endl;
-                    //file2<<username<<endl;
-                    //file2<<password<<endl;
                 }
             }
             file.close();
-            //file1.close();
-            //file2.close();
-            //remove("MangerPass.txt");
-            //rename("MPass.txt","MangerPass.txt");
+
             if(flag1){
                 cout<<"Username Is Updated"<<endl<<endl;
             }
@@ -212,22 +193,15 @@ void managerModule :: changeManagerPass()
                     f = 1;
                     file<<user[j]<<endl;
                     file<<newPassword<<endl;
-                    //file2<<username<<endl;
-                    //file2<<newPassword<<endl;
             }
             else
             {
                     file<<user[j]<<endl;
                     file<<pass[j]<<endl;
-                    //file2<<username<<endl;
-                    //file2<<password<<endl;
             }
         }
         file.close();
-        //file1.close();
-        //file2.close();
-        //remove("MangerPass.txt");
-        //rename("ManagerPass.txt","MangerPass.txt");
+
         if(f==1){cout<<"Password Is Updated"<<endl<<endl;}
         else if(f==2){cout<<"New Password Is Not Same As Confirm Password"<<endl<<endl;}
         else
@@ -253,45 +227,113 @@ void managerModule :: changeManagerPass()
 
 void managerModule :: createEmployee(){
     system("cls");
-    cout<<"\n\n\t\t\t employeeCreatepanel \n";
+
+
+    HANDLE h=GetStdHandle(STD_OUTPUT_HANDLE);    //for create.employee text color
+    SetConsoleTextAttribute(h,9);
+
+
+    cout<<"\n\n\t\t\t EmployeeCreatepanel \n";
     fstream file;
+    file.open("employeeusedID.txt",ios::in);   //****
+    file>>employeeusedID;
+    file.close();
+
     cout<<"How many employee to be added ?\n"<<'\n';
     cin>>n;
     for(int i=0;i<n;i++){
-        cout<<"Insert id :";
-        cin>>employeeId;
-        cout<<endl;
+        employeeusedID++;   //****
+        cout<<"ID : "<<employeeusedID<<'\n';
+        file.open("employeeusedID.txt",ios::out);
+        file<<employeeusedID;
+        file.close();    //****
+
+
+        // for non input enter
         cout<<"Insert Name : ";
-        cin.ignore();getline(cin,employeeName);
-        cout<<endl;
+         while(1){
+            getline(cin,employeeName);
+            if(employeeName.length()!=0)
+            {
+                break;
+            }
+          }
+         cout<<endl;
+
+
+
         cout<<"Insert Gender : ";
-        cin>>employeeGender;
-        cout<<endl;
+        while(1){
+            getline(cin,employeeGender);
+            if(employeeGender.length()!=0)
+            {
+                break;
+            }
+          }
+          cout<<endl;
+
+
         cout<<"Insert Post : ";
-        cin>>employeePost;
-        cout<<endl;
-        cout<<"Insert Salary : ";
-        cin>>employeeSalary;
+        while(1){
+            getline(cin,employeePost);
+            if(employeePost.length()!=0)
+            {
+                break;
+            }
+          }
         cout<<endl;
 
+
+        cout<<"Insert Salary : ";
+        while(1){
+            getline(cin,employeeSalary);
+            if(employeeSalary.length()!=0)
+            {
+                break;
+            }
+          }
+        cout<<endl;
+
+
+        //updated ckk ok
+        fstream file1;
+        file1.open("EmployeePass.txt",ios::app|ios::out);
+        file1<<to_string(employeeusedID)<<endl;
+        file1<<to_string(employeeusedID)<<endl;
+        file1.close();
+
+
+
         file.open("employeeRecord.txt",ios::app|ios::out);
-        file<<employeeId<<endl;
+        //file<<employeeId<<endl;     //****
+        file<<employeeusedID<<endl;
         file<<employeeName<<endl;
         file<<employeeGender<<endl;
         file<<employeePost<<endl;
         file<<employeeSalary<<endl;
         file.close();
 
+       if(i!=n-1)
+       getchar();
        }
 }
+
+
 void managerModule :: readEmployee(){
     system("cls");
+
+    HANDLE h=GetStdHandle(STD_OUTPUT_HANDLE);    //for read.employee text color
+    SetConsoleTextAttribute(h,14);
+
     fstream file;
     file.open("employeeRecord.txt",ios::in);
-    cout<<"\n\n\t\t\t\tDisplay Record\n";
-    cout<<"employeeId "<<" | "<<"employeeName "<<" | "<<"employeeGender "<<" | "<<"employeePost "<<" | "<<"employeeSalary "<<'\n';
+    cout<<"\t\t\t\t~~~~~~~~~~~~~~~~~~~~\n";
+    cout<<"\t\t\t\t|  Display Record  |  \t\t\t\t\n";
+    cout<<"\t\t\t\t~~~~~~~~~~~~~~~~~~~~";
+    cout<<'\n'<<'\n';
+    cout<<"employeeId "<<"  | "<<"employeeName "<<"  | "<<"employeeGender "<<"  | "<<"employeePost "<<"  | "<<"employeeSalary "<<'\n';
 
-    cout<<"--------------------------------------------------------------------------------"<<"\n";
+    cout<<"-----------------------------------------------------------------------------------"<<"\n";
     if(!file)
     {
         cout<<"You need to insert first \nPress any key\n";
@@ -304,32 +346,51 @@ void managerModule :: readEmployee(){
         file>>employeeGender>>employeePost>>employeeSalary;
         cout.fill(' ');
         cout.setf(ios :: left, ios :: adjustfield);
-        cout.width(10);
+        cout.width(12);
+        //cout<<" ";
         cout<<employeeId;
-        cout<<"|  ";
+        cout<<" | ";
+
         cout.fill(' ');
         cout.setf(ios :: left, ios :: adjustfield);
-        cout.width(10);
-        cout<<employeeName<<"| ";
+        cout.width(12);
+        cout<<employeeName;
+        cout<<"   |  ";        //****
+
+        cout.fill(' ');
         cout.setf(ios :: left, ios :: adjustfield);
-        cout.width(10);
-        cout<<employeeGender<<"| ";
+        cout.width(13);
+        cout<<employeeGender;
+        cout<<"   | ";
+
+        cout.fill(' ');
         cout.setf(ios :: left, ios :: adjustfield);
-        cout.width(10);
-        cout<<employeePost<<"| ";
+        cout.width(13);
+        cout<< employeePost;
+        cout<<"  | ";
+
+        cout.fill(' ');
         cout.setf(ios :: left, ios :: adjustfield);
-        cout.width(10);
-        cout<<employeeSalary<<" $";
+        cout.width(13);
+        cout<< employeeSalary<<"$";
         cout<<'\n';
     }
     file.close();
-    cout<<"\n\n\nPress any key to go back"<<'\n';
+    cout<<"\n\n\n Thanks for appointed me!";
+    cout<<"\n\t\t\tPress any key to go back"<<'\n';
     getchar();
 
 }
+
+
 void managerModule :: updateEmployee(){
 
+    HANDLE h=GetStdHandle(STD_OUTPUT_HANDLE);    //for update.employee text color
+    SetConsoleTextAttribute(h,2);
+
+
     found=0;
+    int employeeupdateNo;       //****
     system("cls");
     fstream file,file1;
     file.open("employeeRecord.txt",ios::in);
@@ -337,9 +398,9 @@ void managerModule :: updateEmployee(){
     if(!file)
     {
         cout<<"You need to insert first \nPress any key\n";
-        // adminMenu(); /*blank 2 freeze*/
+
     }
-    cout<<"employeeId to be updaated :\n";
+    cout<<"EmployeeId to be updaated :\n";
     cin>>testId;
     while(file>>employeeId)
     {
@@ -349,21 +410,70 @@ void managerModule :: updateEmployee(){
         if(testId==employeeId)
         {
             found=1;
-            cout<<"Insert id :";
-            cin>>employeeId;
-            cout<<endl;
-            cout<<"Insert Name : ";
-            cin.ignore();getline(cin,employeeName);
-            cout<<endl;
-            cout<<"Insert Gender : ";
-            cin>>employeeGender;
-            cout<<endl;
-            cout<<"Insert Post : ";
-            cin>>employeePost;
-            cout<<endl;
-            cout<<"Insert Salary : ";
-            cin>>employeeSalary;
-            cout<<endl;
+            //cout<<"Insert id :";    //arefin
+            //cin>>employeeId;
+            //cout<<endl;
+            cout<<"1 new name"<<'\n';
+            cout<<"2 new gender"<<'\n';
+            cout<<"3 new post"<<'\n';
+            cout<<"4 new salary"<<'\n';
+
+            cin>>employeeupdateNo;
+            if(employeeupdateNo==1)
+            {
+                cout<<"Insert Name : ";
+                while(1){
+                getline(cin,employeeName);
+                if(employeeName.length()!=0)
+                  {
+                      break;
+                  }
+                }
+                cout<<endl;
+            }
+
+
+            else if(employeeupdateNo==2)
+            {
+                cout<<"Insert Gender : ";
+                while(1){
+                getline(cin,employeeGender);
+                if(employeeGender.length()!=0)
+                  {
+                      break;
+                  }
+                }
+                cout<<endl;
+            }
+
+
+            else if(employeeupdateNo==3)
+            {
+                cout<<"Insert Post : ";
+                while(1){
+                getline(cin,employeePost);
+                if(employeePost.length()!=0)
+                  {
+                      break;
+                  }
+                }
+                cout<<endl;
+            }
+
+
+            else if(employeeupdateNo==4)
+            {
+                cout<<"Insert Salary : ";
+                while(1){
+                getline(cin,employeeSalary);
+                if(employeeSalary.length()!=0)
+                  {
+                      break;
+                  }
+                }
+                cout<<endl;
+            }
+
             file1<<employeeId<<endl;
             file1<<employeeName<<endl;
             file1<<employeeGender<<endl;
@@ -384,15 +494,21 @@ void managerModule :: updateEmployee(){
     remove("employeeRecord.txt");
     rename("employeeRecord1.txt","employeeRecord.txt");
     if(found)
-        cout<<"Successfuly Updated\nPress any key to go back"<<'\n';
+        cout<<"Successfuly Updated :: Thanks for your patience\nPress any key to go back"<<'\n';
     else
         cout<<"Not found \nPress any key to go back"<<'\n';
+
     getchar();
-
-
-
 }
+
+
+
 void managerModule :: deletEmployee(){
+
+    HANDLE h=GetStdHandle(STD_OUTPUT_HANDLE);    //for delete.employee text color
+    SetConsoleTextAttribute(h,4);
+
+
     found=0;
     system("cls");
     fstream file,file1;
@@ -425,10 +541,12 @@ void managerModule :: deletEmployee(){
     file1.close();
     remove("employeeRecord.txt");
     rename("employeeRecord1.txt","employeeRecord.txt");
-    if(found)
-        cout<<"Successfuly Deleted\nPress any key to go back"<<'\n';
+    if(found){
+        cout<<"Successfuly Deleted :: You fired me? okay, one day i will eat your company"<<endl;
+        cout<<"\t\t\t\tPress any key to go back"<<'\n';
+    }
     else
         cout<<"Not found\nPress any key to go back"<<'\n';
-    getchar();
 
+    getchar();
 }
