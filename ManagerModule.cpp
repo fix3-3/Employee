@@ -53,6 +53,24 @@ void managerModule :: changeManagerPass()
     cout<<"* Enter 2 to change Password"<<endl;
     cout<<"* Enter 3 to go back"<<endl;
     cin>>choice;
+    string user[100], pass[100];
+    int i = 0;
+    ifstream read;
+    read.open("MangerPass.txt");
+    while(read>>username>>password)
+    {
+        user[i] = username;
+        pass[i] = password;
+        i++;
+    }
+    int n = 0;
+    /*while(n<3)
+    {
+        cout<<user[n]<<endl;
+        n++;
+    }*/
+    read.close();
+
     if(choice==1)
     {
         system("cls");
@@ -73,41 +91,57 @@ void managerModule :: changeManagerPass()
         cout<<"Enter New Username Without any Space : ";
         cin>>newUsername;
         cout<<endl;
-        ifstream file;
-        file.open("MangerPass.txt");
-        while(file>>checkusername>>password)
+        //fstream file;
+        //file.open("MangerPass.txt",ios::in);
+        /*while(file>>checkusername>>password)
         {
             if(checkusername==newUsername)
             {
                 flag = 0;
                 break;
             }
+        }*/
+        for(int j = 0; j<i; j++)
+        {
+            if(user[j]==newUsername)
+            {
+                flag = 0;
+                break;
+            }
         }
-        file.close();
         if(flag)
         {
-            fstream file,file1;
+            //fstream file1,file2;
+            ofstream file;
+            file.open("MangerPass.txt");
             int flag1 = 0;
-            file.open("MangerPass.txt",ios::in);
-            file1.open("ManagerPass.txt",ios::app|ios::out);
-            while(file>>username>>password)
+            //file1.open("MangerPass.txt",ios::in);
+            //file2.open("MPass.txt",ios::app|ios::out);
+            //while(file1>>username>>password)
+            for(int j = 0; j<i; j++)
             {
-                if(username==oldUsername && oldPassword==password )
+                if(user[j]==oldUsername && oldPassword==pass[j])
                 {
                     flag1 = 1;
-                    file1<<newUsername<<endl;
-                    file1<<password<<endl;
+                    file<<newUsername<<endl;
+                    file<<pass[j]<<endl;
+                    //file2<<newUsername<<endl;
+                    //file2<<password<<endl;
+
                 }
                 else
                 {
-                    file1<<username<<endl;
-                    file1<<password<<endl;
+                    file<<user[j]<<endl;
+                    file<<pass[j]<<endl;
+                    //file2<<username<<endl;
+                    //file2<<password<<endl;
                 }
             }
             file.close();
-            file1.close();
-            remove("MangerPass.txt");
-            rename("ManagerPass.txt","MangerPass.txt");
+            //file1.close();
+            //file2.close();
+            //remove("MangerPass.txt");
+            //rename("MPass.txt","MangerPass.txt");
             if(flag1){
                 cout<<"Username Is Updated"<<endl<<endl;
             }
@@ -165,27 +199,35 @@ void managerModule :: changeManagerPass()
         cout<<endl;
         if(newPassword!=confirmPass)f = 2;
 
-        fstream file,file1;
-        file.open("MangerPass.txt",ios::in);
-        file1.open("ManagerPass.txt",ios::app|ios::out);
-        while(file>>username>>password)
+        ofstream file;
+        file.open("MangerPass.txt");
+        //fstream file1,file2;
+        //file1.open("MangerPass.txt",ios::in);
+        //file2.open("ManagerPass.txt",ios::app|ios::out);
+       // while(file1>>username>>password)
+        for(int j = 0; j<i; j++)
         {
-            if(username==oldUsername && oldPassword==password && newPassword==confirmPass)
+            if(user[j]==oldUsername && oldPassword==pass[j] && newPassword==confirmPass)
             {
                     f = 1;
-                    file1<<username<<endl;
-                    file1<<newPassword<<endl;
+                    file<<user[j]<<endl;
+                    file<<newPassword<<endl;
+                    //file2<<username<<endl;
+                    //file2<<newPassword<<endl;
             }
             else
             {
-                    file1<<username<<endl;
-                    file1<<password<<endl;
+                    file<<user[j]<<endl;
+                    file<<pass[j]<<endl;
+                    //file2<<username<<endl;
+                    //file2<<password<<endl;
             }
         }
         file.close();
-        file1.close();
-        remove("MangerPass.txt");
-        rename("ManagerPass.txt","MangerPass.txt");
+        //file1.close();
+        //file2.close();
+        //remove("MangerPass.txt");
+        //rename("ManagerPass.txt","MangerPass.txt");
         if(f==1){cout<<"Password Is Updated"<<endl<<endl;}
         else if(f==2){cout<<"New Password Is Not Same As Confirm Password"<<endl<<endl;}
         else

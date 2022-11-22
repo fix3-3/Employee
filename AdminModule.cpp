@@ -106,6 +106,7 @@ void adminModule :: managerLogin(){
             menuManagerModule();
         }
     }
+    file.close();
     if(flag==0){
         cout<<"\nWrong username or password\nPlease Try again\nPress any key to go back\n"<<'\n';
     }
