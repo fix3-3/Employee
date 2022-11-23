@@ -1,5 +1,7 @@
 #ifndef EMPLOYEE_H
 #define EMPLOYEE_H
+#include <ctime>
+#include <iostream>
 #include <bits/stdc++.h>
 using namespace std;
 //#include<string.h>
@@ -7,10 +9,14 @@ using namespace std;
 class Employee
 {
     public:
-
-        string employeeId, employeeSalary, testId,employeeName, employeeGender, employeePost,employeeUsername,employeePass;
+        int x,found;
+        string employeeId, employeeSalary, testId,employeeName, employeeGender, employeePost,employeeUsername,employeePass,dt,changePass,pass,username;
         void employeeLogin();
         void showDetails();
+        void frommenuAdminModule();
+        void editDetails();
+        void Attendance();
+        void passchange();
         //Employee();
 
     protected:
