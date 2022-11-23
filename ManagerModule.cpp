@@ -220,6 +220,7 @@ void managerModule :: changeManagerPass()
         cout<<"Invalid Choice"<<endl;
         cout<<endl<<"Enter any Key to Go Back"<<endl;
         getchar();
+        return;
     }
 
 }

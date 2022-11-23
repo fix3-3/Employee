@@ -274,10 +274,38 @@ void adminModule :: managerRead(){
     system("cls");
     fstream file;
     file.open("managerRecord.txt",ios::in);
-    cout<<"\n\n\t\t\t\tDisplay Record\n";
-    cout<<"ManagerId "<<" | "<<"ManagerName "<<" | "<<"ManagerGender "<<" | "<<"ManagerPost "<<" | "<<"ManagerSalary "<<'\n';
+    //cout<<"\n\n\t\t\t\tDisplay Record\n";
+   // cout<<"ManagerId "<<" | "<<"ManagerName "<<" | "<<"ManagerGender "<<" | "<<"ManagerPost "<<" | "<<"ManagerSalary "<<'\n';
 
-    cout<<"--------------------------------------------------------------------------------"<<"\n";
+    //cout<<"--------------------------------------------------------------------------------"<<"\n";
+                cout<<"************************************************Manager details***********************************************"<<endl<<endl;
+                cout<<"--------------------------------------------------------------------------------------------------------------"<<endl;
+                cout.fill(' ');
+                cout.setf(ios :: left, ios :: adjustfield);
+                cout.width(20);
+                cout<<"ManagerId";
+                cout<<"|  ";
+                cout.fill(' ');
+                cout.setf(ios :: left, ios :: adjustfield);
+                cout.width(25);
+                cout<<"ManagerName";
+                cout<<"| ";
+                cout.fill(' ');
+                cout.setf(ios :: left, ios :: adjustfield);
+                cout.width(20);
+                cout<<"ManagerGender";
+                cout<<"|  ";
+                cout.fill(' ');
+                cout.setf(ios :: left, ios :: adjustfield);
+                cout.width(20);
+                cout<<"ManagerPost";
+                cout<<"|  ";
+                cout.fill(' ');
+                cout.setf(ios :: left, ios :: adjustfield);
+                cout.width(10);
+                cout<<"ManagerSalary"<<endl;
+                cout<<"--------------------------------------------------------------------------------------------------------------"<<endl;
+
     if(!file)
     {
         cout<<"You need to insert first \nPress any key\n";
@@ -290,18 +318,18 @@ void adminModule :: managerRead(){
         file>>managerGender>>managerPost>>managerSalary;
         cout.fill(' ');
         cout.setf(ios :: left, ios :: adjustfield);
-        cout.width(10);
+        cout.width(20);
         cout<<managerId;
         cout<<"|  ";
         cout.fill(' ');
         cout.setf(ios :: left, ios :: adjustfield);
-        cout.width(10);
+        cout.width(25);
         cout<<managerName<<"| ";
         cout.setf(ios :: left, ios :: adjustfield);
-        cout.width(10);
+        cout.width(20);
         cout<<managerGender<<"| ";
         cout.setf(ios :: left, ios :: adjustfield);
-        cout.width(10);
+        cout.width(20);
         cout<<managerPost<<"| ";
         cout.setf(ios :: left, ios :: adjustfield);
         cout.width(10);
