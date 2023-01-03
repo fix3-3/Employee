@@ -12,8 +12,9 @@ gg :
     cout<<"3 Update Employee\n"<<'\n';
     cout<<"4 Delete An Employee\n"<<'\n';
     cout<<"5 Change Username And Password\n"<<'\n';
-    cout<<"6 Logout\n"<<'\n';
-    cout<<"7 Exit\n"<<'\n';
+    cout<<"6 Attendence Check\n"<<'\n';
+    cout<<"7 Logout\n"<<'\n';
+    cout<<"8 Exit\n"<<'\n';
     cin>>x;
     switch(x)
     {
@@ -33,8 +34,11 @@ gg :
             changeManagerPass();
             break;
         case 6:
-            return;
+            checkAttendence();
+            break;
         case 7:
+            return;
+        case 8:
             exit(0);
         default :
             cout<<"Try again\n"<<'\n';
@@ -301,6 +305,7 @@ void managerModule :: createEmployee(){
         file1.open("EmployeePass.txt",ios::app|ios::out);
         file1<<to_string(employeeusedID)<<endl;
         file1<<to_string(employeeusedID)<<endl;
+        file1<<to_string(employeeusedID)<<endl;
         file1.close();
 
 
@@ -551,3 +556,83 @@ void managerModule :: deletEmployee(){
 
     getchar();
 }
+void managerModule :: checkAttendence()
+{
+    string day, month, time,  date , year;
+    int f = 0;
+    system("cls");
+    cout<<endl<<endl<<"   ATTENDENCE CHECK   "<<endl<<endl;
+    cout<<"Enter First Three Initial of Day : ";
+    while(1)
+    {
+        cin>>day;
+        if(day.length()!=0 && day.length()==3)
+        {
+            if(day[0]>90)day[0] = day[0]-32;
+            if(day[1]<97)day[1] = day[1] + 32;
+            if(day[2]<97)day[2] = day[2]+ 32;
+            break;
+        }
+    }
+    cout<<endl;
+    cout<<"Enter First Three Initial of Month : ";
+    while(1)
+    {
+        cin>>month;
+        if(month.length()!=0 && month.length()==3)
+        {
+            if(month[0]>90)month[0] = month[0]-32;
+            if(month[1]<97)month[1] = month[1] + 32;
+            if(month[2]<97)month[2] = month[2]+ 32;
+            break;
+        }
+    }
+    cout<<endl;
+    cout<<"Enter Date : ";
+    while(1)
+    {
+        cin>>date;
+        if(date.length()!=0)break;
+    }
+    cout<<endl;
+    cout<<"Enter year : ";
+    while(1)
+    {
+        cin>>year;
+        if(year.length()!=0)break;
+    }
+    cout<<endl;
+    fstream ff, attendant;
+    ff.open("employeeRecord.txt");
+    map<string,string>idName;
+    while(ff>>employeeId)
+        {
+            ff.ignore();
+            getline(ff,employeeName);
+            ff>>employeeGender>>employeePost>>employeeSalary;
+            idName[employeeId] = employeeName;
+        }
+    ff.close();
+    attendant.open("employeeattendance.txt",ios::app|ios::out|ios::in);
+    while(attendant>>attendDay>>attendMonth>>attendDate>>attendTime>>attendYear>>attendId)
+    {
+        if(attendDay==day&&attendMonth==month&&attendDate==date&&attendYear==year)
+        {
+            f = 1;
+            cout<<attendId<<" "<<idName[attendId]<<" "<<attendTime<<endl<<endl;
+        }
+    }
+    attendant.close();
+    if(f==0)
+    {
+        cout<<"No Record Exist For This Day, Month and Date"<<endl<<endl;
+    }
+
+
+    cout<<"Press Any Key To Go Back"<<endl;
+    getch();
+
+
+
+}
+

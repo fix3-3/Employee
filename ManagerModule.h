@@ -11,7 +11,7 @@ class managerModule
     public:
         int n,x,found;
         int employeeusedID;   //****
-        string employeeName,employeeId,testId,employeeGender, employeePost, employeeSalary;
+        string employeeName,employeeId,testId,employeeGender, employeePost, employeeSalary, attendDay,attendMonth,attendDate,attendTime,attendYear,attendId;
 
         //two();
         void menuManagerModule();
@@ -20,6 +20,7 @@ class managerModule
         void updateEmployee();
         void deletEmployee();
         void changeManagerPass();
+        void checkAttendence();
     protected:
 
     private:
