@@ -32,7 +32,7 @@ void Employee :: employeeLogin(){
     cout<<endl;
     ifstream file;
     file.open("EmployeePass.txt");
-    while(file>>fileUsername>>filePassword){
+    while(file>>fileUsername>>filePassword>>attendenceId){
         //cout<<Username<<" "<<
         //cout<<fileUsername<<" "<<filePassword<<endl;
         if(Username == fileUsername && Password == filePassword)
@@ -42,10 +42,11 @@ void Employee :: employeeLogin(){
             cout<<"**************press enter*************"<<endl;
             destination1:
             getchar();
+            system("cls");
             cout<<"1 Read\n"<<'\n';
             cout<<"2 Update\n"<<'\n';
             cout<<"3 Attendance\n"<<'\n';
-            cout<<"4 Log_Out\n"<<'\n';
+            cout<<"4 Log Out\n"<<'\n';
             cout<<"5 Change Username & Password\n"<<'\n';
             cout<<"6 Exit\n"<<'\n';
 
@@ -72,6 +73,7 @@ void Employee :: employeeLogin(){
                     case 5:
                         cout<<"----------Change Username & Password----------"<<endl;
                         passchange();
+                        goto destination1;
                         break;
                     case 6:
                         exit(0);
@@ -99,14 +101,15 @@ void Employee :: employeeLogin(){
      fstream f,f1;
         f.open("employeeRecord.txt");
         //emp:
-        cout<<"Check details for ID :";
-        cin>>testId;
+        //cout<<"Check details for ID :";
+        //cin>>testId;
+        //cout<<attendenceId<<endl;
             while(f>>employeeId)
             {
                 f.ignore();
                 getline(f,employeeName);
                 f>>employeeGender>>employeePost>>employeeSalary;
-                if(testId==employeeId)
+                if(employeeId==attendenceId)
                 {
                     //f>>employeeId>>employeeName>>employeeGender>>employeePost>>employeeSalary;
                 //f.close();
@@ -237,7 +240,7 @@ void Employee :: employeeLogin(){
             file1<<employeeSalary<<endl;
         }
         else
-        {   
+        {
             file1<<employeeId<<endl;
             file1<<employeeName<<endl;
             file1<<employeeGender<<endl;
@@ -264,15 +267,16 @@ void Employee :: employeeLogin(){
 {
 
     fstream attendant,f;
-    f.open("employeeRecord.txt");
+    //f.open("employeeRecord.txt");
     attendant.open("employeeattendance.txt",ios::app|ios::out|ios::in);
+    //cout<<"Press
 
-    while(f>>employeeId)
+    /*while(f>>employeeId)
             {
                 f.ignore();
                 getline(f,employeeName);
-                f>>employeeGender>>employeePost>>employeeSalary;
-                cout<<"Employee ID: "<<employeeId<<endl<<"Press Present(p) or Absent(a) :"<<endl;
+                f>>employeeGender>>employeePost>>employeeSalary;*/
+                cout<<"Press Present(p) to confirm :"<<endl;
                 char c;
                 cin>>c;
         if(c=='p')
@@ -287,12 +291,16 @@ void Employee :: employeeLogin(){
             dt = asctime(gmtm);
             //cout << "The UTC date and time is:" << dt << endl; // print UTC date and time
             //cout<<endl<<dt<<endl;
-            attendant<<dt<<endl<<employeeId<<endl;
+            attendant<<dt<<attendenceId<<endl;
 
         }
+        else
+        {
+            cout<<"Attendence is not confirmed please try again"<<endl;
+            getch();
+        }
 
-
-    }
+    //}
 
 
 
@@ -302,21 +310,22 @@ void Employee :: passchange()
 {
  system("cls");
     cout<<"\n\n\t\t\t Reseting Username and Password \n";
-    string confirmPass, newUsername, newPassword, checkusername, oldUsername, oldPassword, username, password;
+    string confirmPass, newUsername, newPassword, checkusername, oldUsername, oldPassword, username, password, attId;
     int choice, flag = 1;
     cout<<endl;
     cout<<"* Enter 1 to change Username"<<endl;
     cout<<"* Enter 2 to change Password"<<endl;
     cout<<"* Enter 3 to go back"<<endl;
     cin>>choice;
-    string user[100], pass[100];
+    string user[100], pass[100], attenId[100];
     int i = 0;
     ifstream read;
     read.open("EmployeePass.txt");
-    while(read>>username>>password)
+    while(read>>username>>password>>attId)
     {
         user[i] = username;
         pass[i] = password;
+        attenId[i] = attId;
         i++;
     }
     int n = 0;
@@ -339,7 +348,7 @@ void Employee :: passchange()
             oldPassword+=c;
             cout<<"*";
         }
-        cout<<endl;
+        cout<<endl<<endl;
         cout<<"Enter New Username Without any Space : ";
         cin>>newUsername;
         cout<<endl;
@@ -368,16 +377,17 @@ void Employee :: passchange()
                     flag1 = 1;
                     file<<newUsername<<endl;
                     file<<pass[j]<<endl;
+                    file<<attenId[j]<<endl;
 
                 }
                 else
                 {
                     file<<user[j]<<endl;
                     file<<pass[j]<<endl;
+                    file<<attenId[j]<<endl;
                 }
             }
             file.close();
-
             if(flag1){
                 cout<<"Username Is Updated"<<endl<<endl;
             }
@@ -402,6 +412,7 @@ void Employee :: passchange()
         cout<<"\n\n\t\t\t Reseting Password \n"<<endl;
         cout<<"Enter Your Existing Username : ";
         cin>>oldUsername;
+        cout<<endl;
         cout<<"Enter Your Existing Password : ";
         for(int i = 1; i<=50; i++)
         {
@@ -412,7 +423,7 @@ void Employee :: passchange()
             cout<<"*";
         }
 
-        cout<<endl;
+        cout<<endl<<endl;
         cout<<"Enter New Password : ";
         for(int i = 1; i<=50; i++)
         {
@@ -422,7 +433,7 @@ void Employee :: passchange()
             newPassword+=c;
             cout<<"*";
         }
-        cout<<endl;
+        cout<<endl<<endl;;
         cout<<"Confirm Password : ";
         for(int i = 1; i<=50; i++)
         {
@@ -448,15 +459,17 @@ void Employee :: passchange()
                     f = 1;
                     file<<user[j]<<endl;
                     file<<newPassword<<endl;
+                    file<<attenId[j]<<endl;
             }
             else
             {
                     file<<user[j]<<endl;
                     file<<pass[j]<<endl;
+                    file<<attenId[j]<<endl;
             }
         }
         file.close();
-
+        cout<<endl;
         if(f==1){cout<<"Password Is Updated"<<endl<<endl;}
         else if(f==2){cout<<"New Password Is Not Same As Confirm Password"<<endl<<endl;}
         else

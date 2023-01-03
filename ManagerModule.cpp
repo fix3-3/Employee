@@ -12,8 +12,9 @@ gg :
     cout<<"3 Update Employee\n"<<'\n';
     cout<<"4 Delete An Employee\n"<<'\n';
     cout<<"5 Change Username And Password\n"<<'\n';
-    cout<<"6 Logout\n"<<'\n';
-    cout<<"7 Exit\n"<<'\n';
+    cout<<"6 Attendence Check\n"<<'\n';
+    cout<<"7 Logout\n"<<'\n';
+    cout<<"8 Exit\n"<<'\n';
     cin>>x;
     switch(x)
     {
@@ -33,8 +34,11 @@ gg :
             changeManagerPass();
             break;
         case 6:
-            return;
+            checkAttendence();
+            break;
         case 7:
+            return;
+        case 8:
             exit(0);
         default :
             cout<<"Try again\n"<<'\n';
@@ -84,7 +88,7 @@ void managerModule :: changeManagerPass()
             oldPassword+=c;
             cout<<"*";
         }
-        cout<<endl;
+        cout<<endl<<endl;
         cout<<"Enter New Username Without any Space : ";
         cin>>newUsername;
         cout<<endl;
@@ -147,6 +151,7 @@ void managerModule :: changeManagerPass()
         cout<<"\n\n\t\t\t Reseting Password \n"<<endl;
         cout<<"Enter Your Existing Username : ";
         cin>>oldUsername;
+        cout<<endl;
         cout<<"Enter Your Existing Password : ";
         for(int i = 1; i<=50; i++)
         {
@@ -157,7 +162,7 @@ void managerModule :: changeManagerPass()
             cout<<"*";
         }
 
-        cout<<endl;
+        cout<<endl<<endl;
         cout<<"Enter New Password : ";
         for(int i = 1; i<=50; i++)
         {
@@ -167,7 +172,7 @@ void managerModule :: changeManagerPass()
             newPassword+=c;
             cout<<"*";
         }
-        cout<<endl;
+        cout<<endl<<endl;
         cout<<"Confirm Password : ";
         for(int i = 1; i<=50; i++)
         {
@@ -201,7 +206,7 @@ void managerModule :: changeManagerPass()
             }
         }
         file.close();
-
+        cout<<endl;
         if(f==1){cout<<"Password Is Updated"<<endl<<endl;}
         else if(f==2){cout<<"New Password Is Not Same As Confirm Password"<<endl<<endl;}
         else
@@ -301,6 +306,7 @@ void managerModule :: createEmployee(){
         file1.open("EmployeePass.txt",ios::app|ios::out);
         file1<<to_string(employeeusedID)<<endl;
         file1<<to_string(employeeusedID)<<endl;
+        file1<<to_string(employeeusedID)<<endl;
         file1.close();
 
 
@@ -328,13 +334,40 @@ void managerModule :: readEmployee(){
 
     fstream file;
     file.open("employeeRecord.txt",ios::in);
-    cout<<"\t\t\t\t~~~~~~~~~~~~~~~~~~~~\n";
+    /*cout<<"\t\t\t\t~~~~~~~~~~~~~~~~~~~~\n";
     cout<<"\t\t\t\t|  Display Record  |  \t\t\t\t\n";
     cout<<"\t\t\t\t~~~~~~~~~~~~~~~~~~~~";
     cout<<'\n'<<'\n';
     cout<<"employeeId "<<"  | "<<"employeeName "<<"  | "<<"employeeGender "<<"  | "<<"employeePost "<<"  | "<<"employeeSalary "<<'\n';
 
-    cout<<"-----------------------------------------------------------------------------------"<<"\n";
+    cout<<"-----------------------------------------------------------------------------------"<<"\n";*/
+    cout<<"*************************************************Employee details************************************************"<<endl<<endl;
+                cout<<"-----------------------------------------------------------------------------------------------------------------"<<endl;
+                 cout.fill(' ');
+                cout.setf(ios :: left, ios :: adjustfield);
+                cout.width(20);
+                cout<<"Employee Id";
+                cout<<"|  ";
+                cout.fill(' ');
+                cout.setf(ios :: left, ios :: adjustfield);
+                cout.width(25);
+                cout<<"Employee Name";
+                cout<<"|  ";
+                cout.fill(' ');
+                cout.setf(ios :: left, ios :: adjustfield);
+                cout.width(20);
+                cout<<"Employee Gender";
+                cout<<"|  ";
+                cout.fill(' ');
+                cout.setf(ios :: left, ios :: adjustfield);
+                cout.width(20);
+                cout<<"Employee Post";
+                cout<<"|  ";
+                cout.fill(' ');
+                cout.setf(ios :: left, ios :: adjustfield);
+                cout.width(10);
+                cout<<"Employee Salary"<<endl;
+                cout<<"-----------------------------------------------------------------------------------------------------------------"<<endl;
     if(!file)
     {
         cout<<"You need to insert first \nPress any key\n";
@@ -345,39 +378,65 @@ void managerModule :: readEmployee(){
         file.ignore();
         getline(file,employeeName);
         file>>employeeGender>>employeePost>>employeeSalary;
-        cout.fill(' ');
-        cout.setf(ios :: left, ios :: adjustfield);
-        cout.width(12);
-        //cout<<" ";
-        cout<<employeeId;
-        cout<<" | ";
+        /*cout<<"*************************************************Employee details************************************************"<<endl<<endl;
+                cout<<"-----------------------------------------------------------------------------------------------------------------"<<endl;
+                cout.fill(' ');
+                cout.setf(ios :: left, ios :: adjustfield);
+                cout.width(20);
+                cout<<"Employee Id";
+                cout<<"|  ";
+                cout.fill(' ');
+                cout.setf(ios :: left, ios :: adjustfield);
+                cout.width(25);
+                cout<<"Employee Name";
+                cout<<"|  ";
+                cout.fill(' ');
+                cout.setf(ios :: left, ios :: adjustfield);
+                cout.width(20);
+                cout<<"Employee Gender";
+                cout<<"|  ";
+                cout.fill(' ');
+                cout.setf(ios :: left, ios :: adjustfield);
+                cout.width(20);
+                cout<<"Employee Post";
+                cout<<"|  ";
+                cout.fill(' ');
+                cout.setf(ios :: left, ios :: adjustfield);
+                cout.width(10);
+                cout<<"Employee Salary"<<endl;
+                cout<<"-----------------------------------------------------------------------------------------------------------------"<<endl;*/
 
-        cout.fill(' ');
-        cout.setf(ios :: left, ios :: adjustfield);
-        cout.width(12);
-        cout<<employeeName;
-        cout<<"   |  ";        //****
+                //cout<<employeeId<<"    |"<<employeeName<<"    |"<<employeeGender<<"        |"<<employeePost<<"    |"<<employeeSalary<<endl;
+                cout.fill(' ');
+                cout.setf(ios :: left, ios :: adjustfield);
+                cout.width(20);
+                cout<<employeeId;
+                cout<<"|  ";
+                cout.fill(' ');
+                cout.setf(ios :: left, ios :: adjustfield);
+                cout.width(25);
+                cout<<employeeName;
+                cout<<"|  ";
+                cout.fill(' ');
+                cout.setf(ios :: left, ios :: adjustfield);
+                cout.width(20);
+                cout<<employeeGender;
+                cout<<"|  ";
+                cout.fill(' ');
+                cout.setf(ios :: left, ios :: adjustfield);
+                cout.width(20);
+                cout<<employeePost;
+                cout<<"|  ";
+                cout.fill(' ');
+                cout.setf(ios :: left, ios :: adjustfield);
+                cout.width(10);
+                cout<<employeeSalary<<"$";
 
-        cout.fill(' ');
-        cout.setf(ios :: left, ios :: adjustfield);
-        cout.width(13);
-        cout<<employeeGender;
-        cout<<"   | ";
 
-        cout.fill(' ');
-        cout.setf(ios :: left, ios :: adjustfield);
-        cout.width(13);
-        cout<< employeePost;
-        cout<<"  | ";
-
-        cout.fill(' ');
-        cout.setf(ios :: left, ios :: adjustfield);
-        cout.width(13);
-        cout<< employeeSalary<<"$";
-        cout<<'\n';
+                cout<<'\n';
     }
     file.close();
-    cout<<"\n\n\n Thanks for appointed me!";
+    //cout<<"\n\n\n Thanks for appointed me!";
     cout<<"\n\t\t\tPress any key to go back"<<'\n';
     getchar();
 
@@ -543,7 +602,7 @@ void managerModule :: deletEmployee(){
     remove("employeeRecord.txt");
     rename("employeeRecord1.txt","employeeRecord.txt");
     if(found){
-        cout<<"Successfuly Deleted :: You fired me? okay, one day i will eat your company"<<endl;
+        //cout<<"Successfuly Deleted :: You fired me? okay, one day i will eat your company"<<endl;
         cout<<"\t\t\t\tPress any key to go back"<<'\n';
     }
     else
@@ -551,3 +610,83 @@ void managerModule :: deletEmployee(){
 
     getchar();
 }
+void managerModule :: checkAttendence()
+{
+    string day, month, time,  date , year;
+    int f = 0;
+    system("cls");
+    cout<<endl<<endl<<"   ATTENDENCE CHECK   "<<endl<<endl;
+    cout<<"Enter First Three Initial of Day : ";
+    while(1)
+    {
+        cin>>day;
+        if(day.length()!=0 && day.length()==3)
+        {
+            if(day[0]>90)day[0] = day[0]-32;
+            if(day[1]<97)day[1] = day[1] + 32;
+            if(day[2]<97)day[2] = day[2]+ 32;
+            break;
+        }
+    }
+    cout<<endl;
+    cout<<"Enter First Three Initial of Month : ";
+    while(1)
+    {
+        cin>>month;
+        if(month.length()!=0 && month.length()==3)
+        {
+            if(month[0]>90)month[0] = month[0]-32;
+            if(month[1]<97)month[1] = month[1] + 32;
+            if(month[2]<97)month[2] = month[2]+ 32;
+            break;
+        }
+    }
+    cout<<endl;
+    cout<<"Enter Date : ";
+    while(1)
+    {
+        cin>>date;
+        if(date.length()!=0)break;
+    }
+    cout<<endl;
+    cout<<"Enter year : ";
+    while(1)
+    {
+        cin>>year;
+        if(year.length()!=0)break;
+    }
+    cout<<endl;
+    fstream ff, attendant;
+    ff.open("employeeRecord.txt");
+    map<string,string>idName;
+    while(ff>>employeeId)
+        {
+            ff.ignore();
+            getline(ff,employeeName);
+            ff>>employeeGender>>employeePost>>employeeSalary;
+            idName[employeeId] = employeeName;
+        }
+    ff.close();
+    attendant.open("employeeattendance.txt",ios::app|ios::out|ios::in);
+    while(attendant>>attendDay>>attendMonth>>attendDate>>attendTime>>attendYear>>attendId)
+    {
+        if(attendDay==day&&attendMonth==month&&attendDate==date&&attendYear==year)
+        {
+            f = 1;
+            cout<<attendId<<" "<<idName[attendId]<<" "<<attendTime<<endl<<endl;
+        }
+    }
+    attendant.close();
+    if(f==0)
+    {
+        cout<<"No Record Exist For This Day, Month and Date"<<endl<<endl;
+    }
+
+
+    cout<<"Press Any Key To Go Back"<<endl;
+    getch();
+
+
+
+}
+

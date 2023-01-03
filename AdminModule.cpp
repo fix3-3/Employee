@@ -122,9 +122,13 @@ gg :
     cout<<"2 Read Manager"<<'\n';
     cout<<"3 Update Manager"<<'\n';
     cout<<"4 Delete Manager"<<'\n';
-    cout<<"5 Admin Username And Password Change"<<'\n';
-    cout<<"6 logout"<<'\n';
-    cout<<"7 exit"<<'\n';
+    cout<<"5 Create Employee"<<'\n';
+    cout<<"6 Read Employee"<<'\n';
+    cout<<"7 Update Employee"<<'\n';
+    cout<<"8 Delete Employee"<<'\n';
+    cout<<"9 Admin Username And Password Change"<<'\n';
+    cout<<"10 logout"<<'\n';
+    cout<<"11 exit"<<'\n';
     //ctor
     cin>>x;
     switch(x)
@@ -145,12 +149,27 @@ gg :
             getch();
             break;
         case 5:
+            createEmployee();
+            break;
+        case 6:
+            readEmployee();
+            getch();
+            break;
+        case 7:
+            updateEmployee();
+            getch();
+            break;
+        case 8:
+            deletEmployee();
+            getch();
+            break;
+        case 9:
             adminPassUserChange();
             return;
             break;
-        case 6:
+        case 10:
             return;
-        case 7:
+        case 11:
             exit(0);
 
         default :
