@@ -10,7 +10,7 @@ class Employee
 {
     public:
         int x,found;
-        string employeeId, employeeSalary, testId,employeeName, employeeGender, employeePost,employeeUsername,employeePass,dt,changePass,pass,username;
+        string employeeId, employeeSalary, testId,employeeName, employeeGender, employeePost,employeeUsername,employeePass,dt,changePass,pass,username,attendenceId;
         void employeeLogin();
         void showDetails();
         void frommenuAdminModule();

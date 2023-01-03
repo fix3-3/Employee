@@ -88,7 +88,7 @@ void managerModule :: changeManagerPass()
             oldPassword+=c;
             cout<<"*";
         }
-        cout<<endl;
+        cout<<endl<<endl;
         cout<<"Enter New Username Without any Space : ";
         cin>>newUsername;
         cout<<endl;
@@ -151,6 +151,7 @@ void managerModule :: changeManagerPass()
         cout<<"\n\n\t\t\t Reseting Password \n"<<endl;
         cout<<"Enter Your Existing Username : ";
         cin>>oldUsername;
+        cout<<endl;
         cout<<"Enter Your Existing Password : ";
         for(int i = 1; i<=50; i++)
         {
@@ -161,7 +162,7 @@ void managerModule :: changeManagerPass()
             cout<<"*";
         }
 
-        cout<<endl;
+        cout<<endl<<endl;
         cout<<"Enter New Password : ";
         for(int i = 1; i<=50; i++)
         {
@@ -171,7 +172,7 @@ void managerModule :: changeManagerPass()
             newPassword+=c;
             cout<<"*";
         }
-        cout<<endl;
+        cout<<endl<<endl;
         cout<<"Confirm Password : ";
         for(int i = 1; i<=50; i++)
         {
@@ -205,7 +206,7 @@ void managerModule :: changeManagerPass()
             }
         }
         file.close();
-
+        cout<<endl;
         if(f==1){cout<<"Password Is Updated"<<endl<<endl;}
         else if(f==2){cout<<"New Password Is Not Same As Confirm Password"<<endl<<endl;}
         else
@@ -333,13 +334,40 @@ void managerModule :: readEmployee(){
 
     fstream file;
     file.open("employeeRecord.txt",ios::in);
-    cout<<"\t\t\t\t~~~~~~~~~~~~~~~~~~~~\n";
+    /*cout<<"\t\t\t\t~~~~~~~~~~~~~~~~~~~~\n";
     cout<<"\t\t\t\t|  Display Record  |  \t\t\t\t\n";
     cout<<"\t\t\t\t~~~~~~~~~~~~~~~~~~~~";
     cout<<'\n'<<'\n';
     cout<<"employeeId "<<"  | "<<"employeeName "<<"  | "<<"employeeGender "<<"  | "<<"employeePost "<<"  | "<<"employeeSalary "<<'\n';
 
-    cout<<"-----------------------------------------------------------------------------------"<<"\n";
+    cout<<"-----------------------------------------------------------------------------------"<<"\n";*/
+    cout<<"*************************************************Employee details************************************************"<<endl<<endl;
+                cout<<"-----------------------------------------------------------------------------------------------------------------"<<endl;
+                 cout.fill(' ');
+                cout.setf(ios :: left, ios :: adjustfield);
+                cout.width(20);
+                cout<<"Employee Id";
+                cout<<"|  ";
+                cout.fill(' ');
+                cout.setf(ios :: left, ios :: adjustfield);
+                cout.width(25);
+                cout<<"Employee Name";
+                cout<<"|  ";
+                cout.fill(' ');
+                cout.setf(ios :: left, ios :: adjustfield);
+                cout.width(20);
+                cout<<"Employee Gender";
+                cout<<"|  ";
+                cout.fill(' ');
+                cout.setf(ios :: left, ios :: adjustfield);
+                cout.width(20);
+                cout<<"Employee Post";
+                cout<<"|  ";
+                cout.fill(' ');
+                cout.setf(ios :: left, ios :: adjustfield);
+                cout.width(10);
+                cout<<"Employee Salary"<<endl;
+                cout<<"-----------------------------------------------------------------------------------------------------------------"<<endl;
     if(!file)
     {
         cout<<"You need to insert first \nPress any key\n";
@@ -350,39 +378,65 @@ void managerModule :: readEmployee(){
         file.ignore();
         getline(file,employeeName);
         file>>employeeGender>>employeePost>>employeeSalary;
-        cout.fill(' ');
-        cout.setf(ios :: left, ios :: adjustfield);
-        cout.width(12);
-        //cout<<" ";
-        cout<<employeeId;
-        cout<<" | ";
+        /*cout<<"*************************************************Employee details************************************************"<<endl<<endl;
+                cout<<"-----------------------------------------------------------------------------------------------------------------"<<endl;
+                cout.fill(' ');
+                cout.setf(ios :: left, ios :: adjustfield);
+                cout.width(20);
+                cout<<"Employee Id";
+                cout<<"|  ";
+                cout.fill(' ');
+                cout.setf(ios :: left, ios :: adjustfield);
+                cout.width(25);
+                cout<<"Employee Name";
+                cout<<"|  ";
+                cout.fill(' ');
+                cout.setf(ios :: left, ios :: adjustfield);
+                cout.width(20);
+                cout<<"Employee Gender";
+                cout<<"|  ";
+                cout.fill(' ');
+                cout.setf(ios :: left, ios :: adjustfield);
+                cout.width(20);
+                cout<<"Employee Post";
+                cout<<"|  ";
+                cout.fill(' ');
+                cout.setf(ios :: left, ios :: adjustfield);
+                cout.width(10);
+                cout<<"Employee Salary"<<endl;
+                cout<<"-----------------------------------------------------------------------------------------------------------------"<<endl;*/
 
-        cout.fill(' ');
-        cout.setf(ios :: left, ios :: adjustfield);
-        cout.width(12);
-        cout<<employeeName;
-        cout<<"   |  ";        //****
+                //cout<<employeeId<<"    |"<<employeeName<<"    |"<<employeeGender<<"        |"<<employeePost<<"    |"<<employeeSalary<<endl;
+                cout.fill(' ');
+                cout.setf(ios :: left, ios :: adjustfield);
+                cout.width(20);
+                cout<<employeeId;
+                cout<<"|  ";
+                cout.fill(' ');
+                cout.setf(ios :: left, ios :: adjustfield);
+                cout.width(25);
+                cout<<employeeName;
+                cout<<"|  ";
+                cout.fill(' ');
+                cout.setf(ios :: left, ios :: adjustfield);
+                cout.width(20);
+                cout<<employeeGender;
+                cout<<"|  ";
+                cout.fill(' ');
+                cout.setf(ios :: left, ios :: adjustfield);
+                cout.width(20);
+                cout<<employeePost;
+                cout<<"|  ";
+                cout.fill(' ');
+                cout.setf(ios :: left, ios :: adjustfield);
+                cout.width(10);
+                cout<<employeeSalary<<"$";
 
-        cout.fill(' ');
-        cout.setf(ios :: left, ios :: adjustfield);
-        cout.width(13);
-        cout<<employeeGender;
-        cout<<"   | ";
 
-        cout.fill(' ');
-        cout.setf(ios :: left, ios :: adjustfield);
-        cout.width(13);
-        cout<< employeePost;
-        cout<<"  | ";
-
-        cout.fill(' ');
-        cout.setf(ios :: left, ios :: adjustfield);
-        cout.width(13);
-        cout<< employeeSalary<<"$";
-        cout<<'\n';
+                cout<<'\n';
     }
     file.close();
-    cout<<"\n\n\n Thanks for appointed me!";
+    //cout<<"\n\n\n Thanks for appointed me!";
     cout<<"\n\t\t\tPress any key to go back"<<'\n';
     getchar();
 
@@ -548,7 +602,7 @@ void managerModule :: deletEmployee(){
     remove("employeeRecord.txt");
     rename("employeeRecord1.txt","employeeRecord.txt");
     if(found){
-        cout<<"Successfuly Deleted :: You fired me? okay, one day i will eat your company"<<endl;
+        //cout<<"Successfuly Deleted :: You fired me? okay, one day i will eat your company"<<endl;
         cout<<"\t\t\t\tPress any key to go back"<<'\n';
     }
     else
